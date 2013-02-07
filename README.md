@@ -8,7 +8,8 @@ About
 ---------
 MLPAutoCompleteTextField is a subclass of UITextField that behaves like a typical UITextField with one notable exception: it manages a drop down table of autocomplete suggestions that update as the user types. Its behavior may remind you of Google's autocomplete search feature.
 
-Example: A user is required to enter a long and complicated chemical name into a textfield. With an autocomplete textfield, chemical names that closely match her entered string can be displayed as she types, and if she sees the chemical name she was thinking of she can select it and have it entered into the textfield automatically. This reduces the amount of typing she has to do and helps prevent errors. All this can occur within a single view and without the need for a search tableview controller.
+####Example:
+  >A user is required to enter a long and complicated chemical name into a textfield. With an autocomplete textfield, chemical names that closely match her entered string can be displayed as she types, and if she sees the chemical name she was thinking of she can select it and have it entered into the textfield automatically. This reduces the amount of typing she has to do and helps prevent errors. All this can occur within a single view and without the need for a search tableview controller.
 
 
 Usage
@@ -16,9 +17,12 @@ Usage
 The goal for MLPAutoCompleteTextField is to create an autocomplete textfield that is quick and easy to use, yet eminently customizable. To get a working MLPAutoCompleteTextField instance, ensure you have done the following:
 
 0. Add the MLPAutoCompleteTextField, NSString+Levenshtein, MLPAutoCompleteDataSource and MLPAutoCompleteTextFieldDelegate files into your project (should have six files in total). 
+
 1. Have an MLPAutoCompleteTextField instance allocated and initialized within some view.
+
 2. Set the textfield's "autoCompleteDataSource" property to a valid object that implements the required methods of the MLPAutoCompleteTextFieldDataSource protocol. Note that the method "possibleAutoCompleteSuggestionsForString:" is the method you use to return possible completions for the textfield's currently entered string. The array of strings you give will automatically be sorted in order of closest match to the user's entered string.
-3. (Optional) Set the textfield's "autoCompleteDelegate" property to a valid object that implements the methods of the MLPAutoCompleteTextFieldDelegate protocol for further customization options.
+
+3. _(Optional)_ Set the textfield's "autoCompleteDelegate" property to a valid object that implements the methods of the MLPAutoCompleteTextFieldDelegate protocol for further customization options.
 
 You should now have a working MLPAutoCompleteTextField at this point. 
 
@@ -31,7 +35,7 @@ The MLPAutoCompleteTextField sorting of autocomplete strings is powered by the N
 
 When a datasource passes an array of strings to an MLPAutoCompleteTextField, the textfield sorts the strings according to edit distance and displays this list of autocomplete suggestions.
 
-*Used responsibly*, we hope the MLPAutoCompleteTextField will open up new design possibilities for developers of all origins and skill levels. 
+**Used responsibly**, we hope the MLPAutoCompleteTextField will open up new design possibilities for developers of all origins and skill levels. 
 
 :D
 
@@ -51,16 +55,16 @@ Known Issues
 What to Expect in Future Updates
 -----------
 
-+Weighted Suggestions: In some cases, there may exist multiple autocomplete strings that are all equally possible completions for the current entered incomplete string. In current versions, the user will simply have to keep typing a few more characters to further narrow down the autocomplete suggestions to float the most probable string to the top of the autocomplete list.
++ Weighted Suggestions: In some cases, there may exist multiple autocomplete strings that are all equally possible completions for the current entered incomplete string. In current versions, the user will simply have to keep typing a few more characters to further narrow down the autocomplete suggestions to float the most probable string to the top of the autocomplete list.
 
-However, in the future you can expect to see a sort of "weighting" or "ranking" system, which will allow you to favor some strings over others by assigning a number to them. Strings with higher weight will appear closer to the top of the list of autocomplete suggestions. So even though a group of strings are all equally possible completions for a given incomplete string, the ones with higher weight are deemed as being the "more probable" matches and will be sorted accordingly. 
+  However, in the future you can expect to see a sort of "weighting" or "ranking" system, which will allow you to favor some strings over others by assigning a number to them. Strings with higher weight will appear closer to the top of the list of autocomplete suggestions. So even though a group of strings are all equally possible completions for a given incomplete string, the ones with higher weight are deemed as being the "more probable" matches and will be sorted accordingly. 
 
-This should further reduce the number of characters a user has to type. 
+  This should further reduce the number of characters a user has to type. 
 
 
-+String Hiding: If an autocomplete suggestion is of such poor quality that it has nothing in common at all with the user's currently entered string, then there may be a built in option to not display this suggestion at all. 
++ String Hiding: If an autocomplete suggestion is of such poor quality that it has nothing in common at all with the user's currently entered string, then there may be a built in option to not display this suggestion at all. 
 
-+Tokenized Bolding: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
++ Tokenized Bolding: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
 
 
 Credits
