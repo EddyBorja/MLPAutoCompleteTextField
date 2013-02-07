@@ -67,6 +67,19 @@ What to Expect in Future Updates
 + _Tokenized Bolding_: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
 
 
+License
+--------
+_MLPAutoCompleteTextField_ uses the MIT License:
+
+>Copyright (c) 2013, Mainloop LLC
+
+>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 Credits
 ---------
 
