@@ -1,6 +1,6 @@
 MLPAutoCompleteTextField
-=====================
-"Don't say another word."
+===================
+"We believe that every tap a user makes drains a tiny bit of their energy and patience. Typing is one of the biggest expenditures of both. What we needed was a textfield that could be completed in as few keystrokes as possible even for very long words. Thus MLPAutoCompleteTextField was born."
 
 ![Alt text](/autocompleteDemo.png "Screenshot")
 
