@@ -388,14 +388,6 @@
 
 #pragma mark - MLPAutoCompleteTextField Delegate
 
-/*
-- (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
-shouldStyleAutoCompleteTableView:(UITableView *)autoCompleteTableView
-               forBorderStyle:(UITextBorderStyle)borderStyle
-{
-    return NO;
-}*/
-
 
 - (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
           shouldConfigureCell:(UITableViewCell *)cell
