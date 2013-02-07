@@ -29,7 +29,7 @@ You should now have a working MLPAutoCompleteTextField at this point.
 
 Notes
 ---------
-Traditionally, you might have seen something similar to the MLPAutoCompleteTextField implemented with something like a "search tableview controller". This approach has some limitations which MLPAutoCompleteTextField has strived to overcome. 
+Traditionally, you might have seen something similar to the MLPAutoCompleteTextField implemented with something like a "search tableview controller". This approach has some limitations and boilerplate code which MLPAutoCompleteTextField has strived to overcome. An MLPAutoCompleteTextField is **not** meant to be a replacement for a search function, it is designed purely string completion purposes.
 
 The MLPAutoCompleteTextField sorting of autocomplete strings is powered by the NSString+Levenshtein category extension written by Mark Aufflick (based loosely on a Levenshtein algorithm written by Rick Bourner). This algorithm basically calculates the edit distance between two strings (the number of changes required to turn one string into the other).
 
@@ -43,7 +43,7 @@ Performance
 ---------
 MLPAutoCompleteTextField uses a multi-threaded approach to it's sorting of autocomplete strings so that the main thread is never blocked and the UI stays 100% responsive. 
 
-Keep in mind that although you can pass an ungodly amount of strings in an array to the MLPAutoCompleteTextField at once, performance will suffer directly related to the number of strings you give (we're talking on the magnitude of thousands of strings). If performance is suffering, you should find ways to reduce the amount of strings you pass to the MLPAutoCompleteTextField when it asks you for them. (For example, if you assume a user will always know the first letter of a word correctly, you may choose to only send an array of words that start with that letter or close to that letter on the keyboard, rather than every single possible word you have). 
+Keep in mind that although you can pass an ungodly amount of strings in an array to the MLPAutoCompleteTextField at once, sorting performance will suffer directly related to the number of strings you give (we're talking on the magnitude of thousands of strings). If performance is suffering, you should find ways to reduce the amount of strings you pass to the MLPAutoCompleteTextField when it asks you for them. (For example, if you assume a user will always know the first letter of a word correctly, you may choose to only send an array of words that start with that letter or even close to that letter on the keyboard, rather than every single possible word you have). 
 
 
 Known Issues
@@ -55,16 +55,16 @@ Known Issues
 What to Expect in Future Updates
 -----------
 
-+ Weighted Suggestions: In some cases, there may exist multiple autocomplete strings that are all equally possible completions for the current entered incomplete string. In current versions, the user will simply have to keep typing a few more characters to further narrow down the autocomplete suggestions to float the most probable string to the top of the autocomplete list.
++ _Weighted Suggestions_: In some cases, there may exist multiple autocomplete strings that are all equally possible completions for the current entered incomplete string. In current versions, the user will simply have to keep typing a few more characters to further narrow down the autocomplete suggestions to float the most probable string to the top of the autocomplete list.
 
   However, in the future you can expect to see a sort of "weighting" or "ranking" system, which will allow you to favor some strings over others by assigning a number to them. Strings with higher weight will appear closer to the top of the list of autocomplete suggestions. So even though a group of strings are all equally possible completions for a given incomplete string, the ones with higher weight are deemed as being the "more probable" matches and will be sorted accordingly. 
 
   This should further reduce the number of characters a user has to type. 
 
 
-+ String Hiding: If an autocomplete suggestion is of such poor quality that it has nothing in common at all with the user's currently entered string, then there may be a built in option to not display this suggestion at all. 
++ _String Hiding_: If an autocomplete suggestion is of such poor quality that it has nothing in common at all with the user's currently entered string, then there may be a built in option to not display this suggestion at all. 
 
-+ Tokenized Bolding: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
++ _Tokenized Bolding_: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
 
 
 Credits
