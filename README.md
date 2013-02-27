@@ -27,6 +27,16 @@ The goal for _MLPAutoCompleteTextField_ is to create an autocomplete textfield t
 You should now have a working _MLPAutoCompleteTextField_ at this point. 
 
 
+Cocoapods
+-------
+CocoaPods are the best way to manage library dependencies in Objective-C projects.
+Learn more at http://cocoapods.org
+
+Add this to your podfile to add the MLPAutoCompleteTextField to your project.
+`pod 'MLPAutoCompleteTextField', '~> 1.0'`
+
+
+
 Notes
 ---------
 Traditionally, you might have seen something similar to the _MLPAutoCompleteTextField_ implemented with something like a "search tableview controller". This approach has some limitations and boilerplate code which _MLPAutoCompleteTextField_ has strived to overcome. An _MLPAutoCompleteTextField_ is **not** meant to be a replacement for a search function, it is designed purely for quick string completion purposes.
