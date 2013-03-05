@@ -27,6 +27,7 @@
 @property (weak) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
 @property (weak) IBOutlet id <MLPAutoCompleteTextFieldDelegate> autoCompleteDelegate;
 
+@property (assign) BOOL sortAutoCompleteSuggestionsByClosestMatch;
 @property (assign) BOOL applyBoldEffectToAutoCompleteSuggestions;
 @property (assign) BOOL reverseAutoCompleteSuggestionsBoldEffect;
 @property (assign) BOOL showTextFieldDropShadowWhenAutoCompleteTableIsOpen;

@@ -145,6 +145,7 @@ static NSString *BackgroundColorKeyPath = @"backgroundColor";
 - (void)setDefaultValuesForVariables
 {
     [self setClipsToBounds:NO];
+    [self setSortAutoCompleteSuggestionsByClosestMatch:YES];
     [self setApplyBoldEffectToAutoCompleteSuggestions:YES];
     [self setShowTextFieldDropShadowWhenAutoCompleteTableIsOpen:YES];
     [self setAutoCompleteRowHeight:40];
@@ -287,10 +288,13 @@ withAutoCompleteString:(NSString *)string
         }
     }
     
+    [cell.textLabel setTextColor:self.textColor];
+    
     if(boldedString){
         [cell.textLabel setAttributedText:boldedString];
     } else {
         [cell.textLabel setText:string];
+        [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
     }
     
     if(self.autoCompleteTableCellTextColor){
@@ -339,10 +343,16 @@ withAutoCompleteString:(NSString *)string
     [self.autoCompleteTableView setUserInteractionEnabled:NO];
     [self.autoCompleteQueue cancelAllOperations];
     NSArray *suggestions = [self.autoCompleteDataSource possibleAutoCompleteSuggestionsForString:self.text];
-    MLPAutoCompleteOperation *operation = [[MLPAutoCompleteOperation alloc] initWithDelegate:self
-                                                                            incompleteString:self.text
-                                                                         possibleCompletions:suggestions];
-    [self.autoCompleteQueue addOperation:operation];
+    
+    if(self.sortAutoCompleteSuggestionsByClosestMatch){
+        MLPAutoCompleteOperation *operation =
+        [[MLPAutoCompleteOperation alloc] initWithDelegate:self
+                                          incompleteString:self.text
+                                       possibleCompletions:suggestions];
+        [self.autoCompleteQueue addOperation:operation];
+    } else {
+        [self autoCompleteTermsDidLoad:suggestions];
+    }
 }
 
 
@@ -422,7 +432,10 @@ withAutoCompleteString:(NSString *)string
                                    willShowAutoCompleteTableView:self.autoCompleteTableView];
             }
         }
-        [self.superview insertSubview:self.autoCompleteTableView atIndex:0];
+        
+        [self.superview bringSubviewToFront:self];
+        [self.superview insertSubview:self.autoCompleteTableView
+                         belowSubview:self];
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
             [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
