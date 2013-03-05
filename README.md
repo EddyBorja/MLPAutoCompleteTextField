@@ -76,6 +76,7 @@ What to Expect in Future Updates
 
 + _Tokenized Bolding_: If a user has entered a string such as "Grate White Sha", and there is an autocomplete suggestion called "Great White Shark", then in the suggestion the word "Great" should be in bold, the word "White" should be regular, and the work "Shark" should have the "rk" bolded. This behaves more like Google's autocomplete. (A user can choose the reverse behavior too).
 
++ _Background Dimming_: When an autocomplete tableview menu is open, there should be an option to have the superview background dim a bit to keep the focus on the textfield and autocomplete suggestions.
 
 License
 --------
