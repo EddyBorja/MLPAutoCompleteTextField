@@ -14,9 +14,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Foundation/Foundation.h>
 
+@class MLPAutoCompleteTextField;
 @protocol MLPAutoCompleteTextFieldDataSource <NSObject>
 
 @required
-- (NSArray *)possibleAutoCompleteSuggestionsForString:(NSString *)string;
-
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField possibleAutoCompleteSuggestionsForString:(NSString *)string callback:(void(^)(NSArray *suggestions))callback;
 @end
