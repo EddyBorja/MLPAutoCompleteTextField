@@ -35,6 +35,7 @@
 static NSString *BorderStyleKeyPath = @"borderStyle";
 static NSString *AutoCompleteTableViewHiddenKeyPath = @"autoCompleteTableView.hidden";
 static NSString *BackgroundColorKeyPath = @"backgroundColor";
+static NSTimeInterval kAutoCompleteRequestDelay = 0.5;
 
 @interface MLPAutoCompleteTextField ()
 @property (strong) UITableView *autoCompleteTableView;
@@ -334,7 +335,8 @@ withAutoCompleteString:(NSString *)string
 - (void)textFieldDidChangeWithNotification:(NSNotification *)aNotification
 {
     if(aNotification.object == self){
-        [self fetchAutoCompleteSuggestions];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fetchAutoCompleteSuggestions) object:nil];
+        [self performSelector:@selector(fetchAutoCompleteSuggestions) withObject:nil afterDelay:kAutoCompleteRequestDelay];
     }
 }
 
