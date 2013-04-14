@@ -344,7 +344,7 @@ withAutoCompleteString:(NSString *)string
 {
     [self.autoCompleteTableView setUserInteractionEnabled:NO];
     [self.autoCompleteQueue cancelAllOperations];
-    [self.autoCompleteDataSource possibleAutoCompleteSuggestionsForString:self.text callback:^(NSArray *suggestions) {
+    [self.autoCompleteDataSource autoCompleteTextField:self possibleAutoCompleteSuggestionsForString:self.text callback:^(NSArray *suggestions) {
         if(self.sortAutoCompleteSuggestionsByClosestMatch){
             MLPAutoCompleteOperation *operation =
             [[MLPAutoCompleteOperation alloc] initWithDelegate:self
