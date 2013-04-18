@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
     
-    [self setSimulateLatency:YES]; //Uncomment to delay the return of autocomplete suggestions.
+    //[self setSimulateLatency:YES]; //Uncomment to delay the return of autocomplete suggestions.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowWithNotification:) name:UIKeyboardDidShowNotification object:nil];
     
