@@ -507,7 +507,7 @@
 		8559144016C19452007F88DE /* Bahamas.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559134616C19452007F88DE /* Bahamas.png */; };
 		8559144116C19452007F88DE /* Bahrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559134716C19452007F88DE /* Bahrain.png */; };
 		8559144216C19452007F88DE /* Bangladesh.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559134816C19452007F88DE /* Bangladesh.png */; };
-		8559144A16C1C2B8007F88DE /* MLPCustomAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8559144916C1C2B7007F88DE /* MLPCustomAutoCompleteCell.m */; };
+		8559144A16C1C2B8007F88DE /* DEMOCustomAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */; };
 		8559144C16C1CE36007F88DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8559144B16C1CE35007F88DE /* QuartzCore.framework */; };
 		85AC584516B2004400CD60D5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584416B2004400CD60D5 /* View.xib */; };
 		85AC584C16B2089700CD60D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584B16B2089700CD60D5 /* Default@2x.png */; };
@@ -519,8 +519,8 @@
 		85FF056B16B0874D009A94EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056A16B0874D009A94EE /* CoreGraphics.framework */; };
 		85FF057116B0874D009A94EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85FF056F16B0874D009A94EE /* InfoPlist.strings */; };
 		85FF057316B0874D009A94EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057216B0874D009A94EE /* main.m */; };
-		85FF057716B0874D009A94EE /* MLPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057616B0874D009A94EE /* MLPAppDelegate.m */; };
-		85FF058016B0874D009A94EE /* MLPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057F16B0874D009A94EE /* MLPViewController.m */; };
+		85FF057716B0874D009A94EE /* DEMOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057616B0874D009A94EE /* DEMOAppDelegate.m */; };
+		85FF058016B0874D009A94EE /* DEMOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057F16B0874D009A94EE /* DEMOViewController.m */; };
 		85FF058B16B0874E009A94EE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF058A16B0874E009A94EE /* SenTestingKit.framework */; };
 		85FF058C16B0874E009A94EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056616B0874D009A94EE /* UIKit.framework */; };
 		85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056816B0874D009A94EE /* Foundation.framework */; };
@@ -1039,8 +1039,8 @@
 		8559134616C19452007F88DE /* Bahamas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bahamas.png; path = Flags/Bahamas.png; sourceTree = "<group>"; };
 		8559134716C19452007F88DE /* Bahrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bahrain.png; path = Flags/Bahrain.png; sourceTree = "<group>"; };
 		8559134816C19452007F88DE /* Bangladesh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bangladesh.png; path = Flags/Bangladesh.png; sourceTree = "<group>"; };
-		8559144816C1C2B7007F88DE /* MLPCustomAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPCustomAutoCompleteCell.h; sourceTree = "<group>"; };
-		8559144916C1C2B7007F88DE /* MLPCustomAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPCustomAutoCompleteCell.m; sourceTree = "<group>"; };
+		8559144816C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCustomAutoCompleteCell.h; sourceTree = "<group>"; };
+		8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCustomAutoCompleteCell.m; sourceTree = "<group>"; };
 		8559144B16C1CE35007F88DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		85AC584416B2004400CD60D5 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		85AC584B16B2089700CD60D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -1059,10 +1059,10 @@
 		85FF057016B0874D009A94EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85FF057216B0874D009A94EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		85FF057416B0874D009A94EE /* MLPAutoCompleteDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLPAutoCompleteDemo-Prefix.pch"; sourceTree = "<group>"; };
-		85FF057516B0874D009A94EE /* MLPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPAppDelegate.h; sourceTree = "<group>"; };
-		85FF057616B0874D009A94EE /* MLPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPAppDelegate.m; sourceTree = "<group>"; };
-		85FF057E16B0874D009A94EE /* MLPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPViewController.h; sourceTree = "<group>"; };
-		85FF057F16B0874D009A94EE /* MLPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPViewController.m; sourceTree = "<group>"; };
+		85FF057516B0874D009A94EE /* DEMOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMOAppDelegate.h; sourceTree = "<group>"; };
+		85FF057616B0874D009A94EE /* DEMOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOAppDelegate.m; sourceTree = "<group>"; };
+		85FF057E16B0874D009A94EE /* DEMOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMOViewController.h; sourceTree = "<group>"; };
+		85FF057F16B0874D009A94EE /* DEMOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOViewController.m; sourceTree = "<group>"; };
 		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85FF058A16B0874E009A94EE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		85FF059216B0874E009A94EE /* MLPAutoCompleteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLPAutoCompleteDemoTests-Info.plist"; sourceTree = "<group>"; };
@@ -1645,12 +1645,12 @@
 			isa = PBXGroup;
 			children = (
 				85FF05A116B0887F009A94EE /* MLPAutoCompleteTextField */,
-				85FF057516B0874D009A94EE /* MLPAppDelegate.h */,
-				85FF057616B0874D009A94EE /* MLPAppDelegate.m */,
-				85FF057E16B0874D009A94EE /* MLPViewController.h */,
-				85FF057F16B0874D009A94EE /* MLPViewController.m */,
-				8559144816C1C2B7007F88DE /* MLPCustomAutoCompleteCell.h */,
-				8559144916C1C2B7007F88DE /* MLPCustomAutoCompleteCell.m */,
+				85FF057516B0874D009A94EE /* DEMOAppDelegate.h */,
+				85FF057616B0874D009A94EE /* DEMOAppDelegate.m */,
+				85FF057E16B0874D009A94EE /* DEMOViewController.h */,
+				85FF057F16B0874D009A94EE /* DEMOViewController.m */,
+				8559144816C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.h */,
+				8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */,
 				85FF056D16B0874D009A94EE /* Supporting Files */,
 			);
 			path = MLPAutoCompleteDemo;
@@ -2315,9 +2315,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				85FF057316B0874D009A94EE /* main.m in Sources */,
-				85FF057716B0874D009A94EE /* MLPAppDelegate.m in Sources */,
-				85FF058016B0874D009A94EE /* MLPViewController.m in Sources */,
-				8559144A16C1C2B8007F88DE /* MLPCustomAutoCompleteCell.m in Sources */,
+				85FF057716B0874D009A94EE /* DEMOAppDelegate.m in Sources */,
+				85FF058016B0874D009A94EE /* DEMOViewController.m in Sources */,
+				8559144A16C1C2B8007F88DE /* DEMOCustomAutoCompleteCell.m in Sources */,
 				85EB411616C3488D000C193E /* MLPAutoCompleteTextField.m in Sources */,
 				85EB411716C3488D000C193E /* NSString+Levenshtein.m in Sources */,
 			);

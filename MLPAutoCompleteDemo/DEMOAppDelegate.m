@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Mainloop. All rights reserved.
 //
 
-#import "MLPAppDelegate.h"
+#import "DEMOAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "MLPViewController.h"
+#import "DEMOViewController.h"
 
-@implementation MLPAppDelegate
+@implementation DEMOAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[MLPViewController alloc] initWithNibName:@"View" bundle:[NSBundle mainBundle]];
+    self.viewController = [[DEMOViewController alloc] initWithNibName:@"View" bundle:[NSBundle mainBundle]];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     [self.window.layer setCornerRadius:4];

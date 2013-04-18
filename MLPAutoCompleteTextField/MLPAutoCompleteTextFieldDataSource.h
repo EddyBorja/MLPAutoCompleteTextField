@@ -18,5 +18,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @protocol MLPAutoCompleteTextFieldDataSource <NSObject>
 
 @required
-- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField possibleAutoCompleteSuggestionsForString:(NSString *)string callback:(void(^)(NSArray *suggestions))callback;
+
+/*
+ This method should return an NSArray of strings that could be used as possible completions
+ for the given string in textField.
+This method will be called asynchronously, so an immediate return is not necessary.
+ */
+- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+      possibleCompletionsForString:(NSString *)string;
+
 @end

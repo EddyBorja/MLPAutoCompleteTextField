@@ -11,10 +11,12 @@
 #import "MLPAutoCompleteTextFieldDelegate.h"
 
 @class MLPAutoCompleteTextField;
-@interface MLPViewController : UIViewController <UITextFieldDelegate, MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate>
+@interface DEMOViewController : UIViewController <UITextFieldDelegate, MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate>
 
 @property (weak) IBOutlet MLPAutoCompleteTextField *autocompleteTextField;
 @property (strong, nonatomic) IBOutlet UILabel *demoTitle;
 @property (strong, nonatomic) IBOutlet UILabel *author;
 
+//Set this to true to prevent auto complete terms from returning instantly.
+@property (assign) BOOL simulateLatency;
 @end

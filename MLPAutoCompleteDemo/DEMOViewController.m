@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Mainloop. All rights reserved.
 //
 
-#import "MLPViewController.h"
+#import "DEMOViewController.h"
 #import "MLPAutoCompleteTextField.h"
-#import "MLPCustomAutoCompleteCell.h"
+#import "DEMOCustomAutoCompleteCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface MLPViewController ()
+@interface DEMOViewController ()
 
 
 @end
 
-@implementation MLPViewController
+@implementation DEMOViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -33,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    [self setSimulateLatency:YES]; //Uncomment to delay the return of autocomplete suggestions.
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowWithNotification:) name:UIKeyboardDidShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideWithNotification:) name:UIKeyboardDidHideNotification object:nil];
@@ -45,7 +47,7 @@
     
     
     //You can use custom TableViewCell classes and nibs in the autocomplete tableview if you wish.
-    [self.autocompleteTextField registerAutoCompleteCellClass:[MLPCustomAutoCompleteCell class]
+    [self.autocompleteTextField registerAutoCompleteCellClass:[DEMOCustomAutoCompleteCell class]
                                        forCellReuseIdentifier:@"CustomCellId"];
     
 }
@@ -126,8 +128,16 @@
 
 
 #pragma mark - MLPAutoCompleteTextField DataSource
-- (NSArray *)possibleAutoCompleteSuggestionsForString:(NSString *)string
+
+- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField                     possibleCompletionsForString:(NSString *)string
 {
+    
+    if(self.simulateLatency){
+        CGFloat seconds = arc4random_uniform(4);
+        NSLog(@"sleeping fetch of completions for %f", seconds);
+        sleep(seconds);
+    }
+    
     NSArray *countries =
     @[
       @"Abkhazia",

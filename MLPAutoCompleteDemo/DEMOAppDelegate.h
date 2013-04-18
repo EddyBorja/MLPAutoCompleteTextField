@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class MLPViewController;
+@class DEMOViewController;
 
-@interface MLPAppDelegate : UIResponder <UIApplicationDelegate>
+@interface DEMOAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) MLPViewController *viewController;
+@property (strong, nonatomic) DEMOViewController *viewController;
 
 @end

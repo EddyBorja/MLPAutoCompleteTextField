@@ -17,14 +17,18 @@
 #import "MLPAutoCompleteTextFieldDataSource.h"
 #import "MLPAutoCompleteTextFieldDelegate.h"
 
-@protocol MLPAutoCompleteOperationDelegate <NSObject>
-- (void)autoCompleteTermsDidLoad:(NSArray *)autocompletions;
+@protocol MLPAutoCompleteSortOperationDelegate <NSObject>
+- (void)autoCompleteTermsDidSort:(NSArray *)completions;
+@end
+
+@protocol MLPAutoCompleteFetchOperationDelegate <NSObject>
+- (void)autoCompleteTermsDidFetch:(NSDictionary *)fetchInfo;
 @end
 
 
-@interface MLPAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, MLPAutoCompleteOperationDelegate>
+@interface MLPAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, MLPAutoCompleteSortOperationDelegate, MLPAutoCompleteFetchOperationDelegate>
 
-@property (weak) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
+@property (strong) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
 @property (weak) IBOutlet id <MLPAutoCompleteTextFieldDelegate> autoCompleteDelegate;
 
 @property (assign) BOOL sortAutoCompleteSuggestionsByClosestMatch;

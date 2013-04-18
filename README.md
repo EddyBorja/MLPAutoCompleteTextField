@@ -20,7 +20,7 @@ The goal for _MLPAutoCompleteTextField_ is to create an autocomplete textfield t
 
 1. Have an _MLPAutoCompleteTextField_ instance allocated and initialized within some view.
 
-2. Set the textfield's "autoCompleteDataSource" property to a valid object that implements the required methods of the _MLPAutoCompleteTextFieldDataSource_ protocol. Note that the method "possibleAutoCompleteSuggestionsForString:" is the method you use to return possible completions for the textfield's currently entered string. The array of strings you give will automatically be sorted in order of closest match to the user's entered string.
+2. Set the textfield's "autoCompleteDataSource" property to a valid object that implements the required methods of the _MLPAutoCompleteTextFieldDataSource_ protocol. Note that the method "autoCompleteTextField:possibleCompletionsForString:" is the method you use to return possible completions for the textfield's currently entered string. The array of strings you give will automatically be sorted in order of closest match to the user's entered string. This method is also called asynchronously. 
 
 3. _(Optional)_ Set the textfield's "autoCompleteDelegate" property to a valid object that implements the methods of the _MLPAutoCompleteTextFieldDelegate_ protocol for further customization options.
 
@@ -89,6 +89,36 @@ _MLPAutoCompleteTextField_ uses the MIT License:
 >The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 >THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+The _NSString+Levenshtein_ category uses this license as stated in the .h and .m files:
+
+>NSString+Levenshtein
+
+>Copyright (c) 2009, Mark Aufflick
+All rights reserved.
+
+>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+>* Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+* Neither the name of the Mark Aufflick nor the
+names of contributors may be used to endorse or promote products
+derived from this software without specific prior written permission.
+
+>THIS SOFTWARE IS PROVIDED BY MARK AUFFLICK ''AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL MARK AUFFLICK BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 Credits
