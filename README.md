@@ -20,7 +20,7 @@ The goal for _MLPAutoCompleteTextField_ is to create an autocomplete textfield t
 
 1. Have an _MLPAutoCompleteTextField_ instance allocated and initialized within some view.
 
-2. Set the textfield's "autoCompleteDataSource" property to a valid object that implements the required methods of the _MLPAutoCompleteTextFieldDataSource_ protocol. Note that the method "autoCompleteTextField:possibleCompletionsForString:" is the method you use to return possible completions for the textfield's currently entered string. This method is expected to return either an array of _NSString_s, or an array of objects conforming to the _MLPAutoCompletionObject_ protocol, or a mix of both. This method is also called asynchronously. 
+2. Set the textfield's "autoCompleteDataSource" property to a valid object that implements the required methods of the _MLPAutoCompleteTextFieldDataSource_ protocol. Note that the method "autoCompleteTextField:possibleCompletionsForString:" is the method you use to return possible completions for the textfield's currently entered string. This method is expected to return either an array of _NSString_, or an array of objects conforming to the _MLPAutoCompletionObject_ protocol, or a mix of both. This method is also called asynchronously. 
 
 3. _(Optional)_ Set the textfield's "autoCompleteDelegate" property to a valid object that implements the methods of the _MLPAutoCompleteTextFieldDelegate_ protocol for further customization options.
 
