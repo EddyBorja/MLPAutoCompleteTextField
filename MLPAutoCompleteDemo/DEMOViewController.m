@@ -9,6 +9,7 @@
 #import "DEMOViewController.h"
 #import "MLPAutoCompleteTextField.h"
 #import "DEMOCustomAutoCompleteCell.h"
+#import "DEMOCustomAutoCompleteObject.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface DEMOViewController ()
@@ -34,6 +35,8 @@
     [super viewDidLoad];
     
     //[self setSimulateLatency:YES]; //Uncomment to delay the return of autocomplete suggestions.
+    //[self setTestWithAutoCompleteObjectsInsteadOfStrings:YES]; //Uncomment to return autocomplete objects instead of strings to the textfield.
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowWithNotification:) name:UIKeyboardDidShowNotification object:nil];
     
@@ -129,7 +132,8 @@
 
 #pragma mark - MLPAutoCompleteTextField DataSource
 
-- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField                     possibleCompletionsForString:(NSString *)string
+- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+      possibleCompletionsForString:(NSString *)string
 {
     
     if(self.simulateLatency){
@@ -138,6 +142,35 @@
         sleep(seconds);
     }
     
+    NSArray *completions;
+    if(self.testWithAutoCompleteObjectsInsteadOfStrings){
+        completions = [self allCountryObjects];
+    } else {
+        completions = [self allCountries];
+    }
+
+    return completions;
+}
+
+- (NSArray *)allCountryObjects
+{
+    if(!self.countryObjects){
+        NSArray *countryNames = [self allCountries];
+        NSMutableArray *mutableCountries = [NSMutableArray new];
+        for(NSString *countryName in countryNames){
+            DEMOCustomAutoCompleteObject *country = [[DEMOCustomAutoCompleteObject alloc] initWithCountry:countryName];
+            [mutableCountries addObject:country];
+        }
+        
+        [self setCountryObjects:[NSArray arrayWithArray:mutableCountries]];
+    }
+    
+    return self.countryObjects;
+}
+
+
+- (NSArray *)allCountries
+{
     NSArray *countries =
     @[
       @"Abkhazia",
@@ -390,10 +423,11 @@
       @"Yemen",
       @"Zambia",
       @"Zimbabwe"
-    ];
-
+      ];
+    
     return countries;
 }
+
 
 
 #pragma mark - MLPAutoCompleteTextField Delegate
@@ -414,6 +448,17 @@
     return YES;
 }
 
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+    didSelectAutoCompleteString:(NSString *)selectedString
+    withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(selectedObject){
+        NSLog(@"selected object from autocomplete menu %@ with string %@", selectedObject, [selectedObject autocompleteString]);
+    } else {
+        NSLog(@"selected string '%@' from autocomplete menu", selectedString);
+    }
+}
 
 
 @end

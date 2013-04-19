@@ -13,11 +13,13 @@
 */
 
 #import "MLPAutoCompleteTextField.h"
+#import "MLPAutoCompletionObject.h"
 #import "NSString+Levenshtein.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSString *kSortInputStringKey = @"sortInputString";
 static NSString *kSortEditDistancesKey = @"editDistances";
+static NSString *kSortObjectKey = @"sortObject";
 @interface MLPAutoCompleteSortOperation: NSOperation
 @property (strong) NSString *incompleteString;
 @property (strong) NSArray *possibleCompletions;
@@ -188,11 +190,22 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier];
     }
-    
     NSAssert(cell, @"Unable to create cell for autocomplete table");
     
-    NSString *suggestedString = self.autoCompleteSuggestions[indexPath.row];
+    
+    id autoCompleteObject = self.autoCompleteSuggestions[indexPath.row];
+    NSString *suggestedString;
+    if([autoCompleteObject isKindOfClass:[NSString class]]){
+        suggestedString = (NSString *)autoCompleteObject;
+    } else if ([autoCompleteObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
+        suggestedString = [(id <MLPAutoCompletionObject>)autoCompleteObject autocompleteString];
+    } else {
+        NSAssert(0, @"Autocomplete suggestions must either be NSString or objects conforming to the MLPAutoCompletionObject protocol.");
+    }
+    
+    
     [self configureCell:cell atIndexPath:indexPath withAutoCompleteString:suggestedString];
+    
     
     return cell;
 }
@@ -254,9 +267,17 @@ withAutoCompleteString:(NSString *)string
     NSString *autoCompleteString = selectedCell.textLabel.text;
     self.text = autoCompleteString;
     
-    if([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:didSelectAutoCompleteString:forRowAtIndexPath:)]){
+    id<MLPAutoCompletionObject> autoCompleteObject = self.autoCompleteSuggestions[indexPath.row];
+    if(![autoCompleteObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
+        autoCompleteObject = nil;
+    }
+    
+    if([self.autoCompleteDelegate respondsToSelector:
+        @selector(autoCompleteTextField:didSelectAutoCompleteString:withAutoCompleteObject:forRowAtIndexPath:)]){
+        
         [self.autoCompleteDelegate autoCompleteTextField:self
                              didSelectAutoCompleteString:autoCompleteString
+                                  withAutoCompleteObject:autoCompleteObject
                                        forRowAtIndexPath:indexPath];
     }
     
@@ -566,7 +587,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)fetchAutoCompleteSuggestions
 {
-    [self.autoCompleteTableView setUserInteractionEnabled:NO];
+    if(self.disableAutoCompleteTableUserInteractionWhileFetching){
+        [self.autoCompleteTableView setUserInteractionEnabled:NO];
+    }
+    
     [self.autoCompleteFetchQueue cancelAllOperations];
     
     MLPAutoCompleteFetchOperation *fetchOperation = [[MLPAutoCompleteFetchOperation alloc]
@@ -675,6 +699,12 @@ withAutoCompleteString:(NSString *)string
     
         NSArray *results = [self.dataSource autoCompleteTextField:self.textField
                                      possibleCompletionsForString:self.incompleteString];
+        if(results.count){
+            NSObject *firstObject = results[0];
+            NSAssert([firstObject isKindOfClass:[NSString class]] ||
+                     [firstObject conformsToProtocol:@protocol(MLPAutoCompletionObject)],
+                     @"MLPAutoCompleteTextField expects an array with objects that are either strings or conform to the MLPAutoCompletionObject protocol for possible completions.");
+        }
         
         if (self.isCancelled){
             return;
@@ -776,7 +806,16 @@ withAutoCompleteString:(NSString *)string
     float editDistanceOfCurrentString;
     NSDictionary *stringsWithEditDistances;
     NSUInteger maximumRange;
-    for(NSString *currentString in possibleTerms) {
+    NSString *currentString;
+    for(NSObject *originalObject in possibleTerms) {
+        
+        if([originalObject isKindOfClass:[NSString class]]){
+            currentString = (NSString *)originalObject;
+        } else if ([originalObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
+            currentString = [(id <MLPAutoCompletionObject>)originalObject autocompleteString];
+        } else {
+            NSAssert(0, @"Autocompletion terms must either be strings or objects conforming to the MLPAutoCompleteObject protocol.");
+        }
         
         if(self.isCancelled){
             return [NSArray array];
@@ -786,6 +825,7 @@ withAutoCompleteString:(NSString *)string
         editDistanceOfCurrentString = [inputString asciiLevenshteinDistanceWithString:[currentString substringWithRange:NSMakeRange(0, maximumRange)]];
         
         stringsWithEditDistances = @{kSortInputStringKey : currentString ,
+                                     kSortObjectKey : originalObject,
                                      kSortEditDistancesKey : [NSNumber numberWithFloat:editDistanceOfCurrentString]};
         [editDistances addObject:stringsWithEditDistances];
     }
@@ -812,13 +852,14 @@ withAutoCompleteString:(NSString *)string
         }
         
         suggestedString = stringsWithEditDistances[kSortInputStringKey];
+        NSObject *autoCompleteObject = stringsWithEditDistances[kSortObjectKey];
         NSRange occurrenceOfInputString = [[suggestedString lowercaseString]
                                            rangeOfString:[inputString lowercaseString]];
         
         if (occurrenceOfInputString.length != 0 && occurrenceOfInputString.location == 0) {
-            [prioritySuggestions addObject:suggestedString];
+            [prioritySuggestions addObject:autoCompleteObject];
         } else{
-            [otherSuggestions addObject:suggestedString];
+            [otherSuggestions addObject:autoCompleteObject];
         }
     }
     

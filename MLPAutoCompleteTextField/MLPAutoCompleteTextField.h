@@ -36,6 +36,7 @@
 @property (assign) BOOL reverseAutoCompleteSuggestionsBoldEffect;
 @property (assign) BOOL showTextFieldDropShadowWhenAutoCompleteTableIsOpen;
 @property (assign) BOOL showAutoCompleteTableWhenEditingBegins;
+@property (assign) BOOL disableAutoCompleteTableUserInteractionWhileFetching;
 
 @property (assign) BOOL autoCompleteTableViewHidden;
 

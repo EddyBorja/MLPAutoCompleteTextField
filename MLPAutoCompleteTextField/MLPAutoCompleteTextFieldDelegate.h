@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 #import <Foundation/Foundation.h>
+#import "MLPAutoCompletionObject.h"
 
 @class MLPAutoCompleteTextField;
 @protocol MLPAutoCompleteTextFieldDelegate <NSObject>
@@ -22,14 +23,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     shouldStyleAutoCompleteTableView:(UITableView *)autoCompleteTableView
                       forBorderStyle:(UITextBorderStyle)borderStyle;
 
+/*IndexPath corresponds to the order of strings within the autocomplete table,
+ not the original data source.*/
 - (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
           shouldConfigureCell:(UITableViewCell *)cell
        withAutoCompleteString:(NSString *)autocompleteString
          withAttributedString:(NSAttributedString *)boldedString
             forRowAtIndexPath:(NSIndexPath *)indexPath;
 
+/*IndexPath corresponds to the order of strings within the autocomplete table,
+not the original data source.
+ autoCompleteObject may be nil if the selectedString had no object associated with it.
+ */
 - (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
   didSelectAutoCompleteString:(NSString *)selectedString
+       withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
             forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField

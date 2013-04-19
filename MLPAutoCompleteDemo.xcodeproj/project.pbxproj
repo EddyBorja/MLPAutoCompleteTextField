@@ -509,6 +509,7 @@
 		8559144216C19452007F88DE /* Bangladesh.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559134816C19452007F88DE /* Bangladesh.png */; };
 		8559144A16C1C2B8007F88DE /* DEMOCustomAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */; };
 		8559144C16C1CE36007F88DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8559144B16C1CE35007F88DE /* QuartzCore.framework */; };
+		856E78581721E18B00932197 /* DEMOCustomAutoCompleteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 856E78571721E18B00932197 /* DEMOCustomAutoCompleteObject.m */; };
 		85AC584516B2004400CD60D5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584416B2004400CD60D5 /* View.xib */; };
 		85AC584C16B2089700CD60D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584B16B2089700CD60D5 /* Default@2x.png */; };
 		85AC584E16B2089C00CD60D5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584D16B2089C00CD60D5 /* Default-568h@2x.png */; };
@@ -1042,6 +1043,9 @@
 		8559144816C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCustomAutoCompleteCell.h; sourceTree = "<group>"; };
 		8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCustomAutoCompleteCell.m; sourceTree = "<group>"; };
 		8559144B16C1CE35007F88DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		856E78551721A2A200932197 /* MLPAutoCompletionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLPAutoCompletionObject.h; path = MLPAutoCompleteTextField/MLPAutoCompletionObject.h; sourceTree = SOURCE_ROOT; };
+		856E78561721E18B00932197 /* DEMOCustomAutoCompleteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOCustomAutoCompleteObject.h; sourceTree = "<group>"; };
+		856E78571721E18B00932197 /* DEMOCustomAutoCompleteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOCustomAutoCompleteObject.m; sourceTree = "<group>"; };
 		85AC584416B2004400CD60D5 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		85AC584B16B2089700CD60D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		85AC584D16B2089C00CD60D5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1649,6 +1653,8 @@
 				85FF057616B0874D009A94EE /* DEMOAppDelegate.m */,
 				85FF057E16B0874D009A94EE /* DEMOViewController.h */,
 				85FF057F16B0874D009A94EE /* DEMOViewController.m */,
+				856E78561721E18B00932197 /* DEMOCustomAutoCompleteObject.h */,
+				856E78571721E18B00932197 /* DEMOCustomAutoCompleteObject.m */,
 				8559144816C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.h */,
 				8559144916C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.m */,
 				85FF056D16B0874D009A94EE /* Supporting Files */,
@@ -1698,6 +1704,7 @@
 				85EB411116C3488D000C193E /* MLPAutoCompleteTextField.m */,
 				85EB411216C3488D000C193E /* MLPAutoCompleteTextFieldDataSource.h */,
 				85EB411316C3488D000C193E /* MLPAutoCompleteTextFieldDelegate.h */,
+				856E78551721A2A200932197 /* MLPAutoCompletionObject.h */,
 				85EB411416C3488D000C193E /* NSString+Levenshtein.h */,
 				85EB411516C3488D000C193E /* NSString+Levenshtein.m */,
 			);
@@ -2320,6 +2327,7 @@
 				8559144A16C1C2B8007F88DE /* DEMOCustomAutoCompleteCell.m in Sources */,
 				85EB411616C3488D000C193E /* MLPAutoCompleteTextField.m in Sources */,
 				85EB411716C3488D000C193E /* NSString+Levenshtein.m in Sources */,
+				856E78581721E18B00932197 /* DEMOCustomAutoCompleteObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
