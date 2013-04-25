@@ -2,7 +2,7 @@ MLPAutoCompleteTextField
 ===================
 >"We believe that every tap a user makes drains a tiny bit of their energy and patience. Typing is one of the biggest expenditures of both. What we needed was a textfield that could be completed in as few keystrokes as possible even for very long words. Thus _MLPAutoCompleteTextField_ was born."
 
-![Alt text](/autocompleteDemo.png "Screenshot") ![Alt text](/keyboardDemo.png "Screenshot")
+![Alt text](/autocompleteDemo.png "Screenshot")|![Alt text](/keyboardDemo.png "Screenshot")
 
 About
 ---------
