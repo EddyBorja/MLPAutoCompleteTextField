@@ -16,6 +16,7 @@
 @property (weak) IBOutlet MLPAutoCompleteTextField *autocompleteTextField;
 @property (strong, nonatomic) IBOutlet UILabel *demoTitle;
 @property (strong, nonatomic) IBOutlet UILabel *author;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *typeSwitch;
 @property (strong, nonatomic) NSArray *countryObjects;
 
 //Set this to true to prevent auto complete terms from returning instantly.

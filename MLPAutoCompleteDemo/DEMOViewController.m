@@ -19,6 +19,7 @@
 
 @implementation DEMOViewController
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.view setAlpha:0];
@@ -42,16 +43,32 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideWithNotification:) name:UIKeyboardDidHideNotification object:nil];
     
+    [self.typeSwitch addTarget:self
+                        action:@selector(typeDidChange:)
+              forControlEvents:UIControlEventValueChanged];
+    
     //Supported Styles:
     //[self.autocompleteTextField setBorderStyle:UITextBorderStyleBezel];
-    //TODO[self.autocompleteTextField setBorderStyle:UITextBorderStyleLine];
+    //[self.autocompleteTextField setBorderStyle:UITextBorderStyleLine];
     //[self.autocompleteTextField setBorderStyle:UITextBorderStyleNone];
     [self.autocompleteTextField setBorderStyle:UITextBorderStyleRoundedRect];
     
+    //[self.autocompleteTextField setMaximumNumberOfAutoCompleteRows:4];
+
     
     //You can use custom TableViewCell classes and nibs in the autocomplete tableview if you wish.
     [self.autocompleteTextField registerAutoCompleteCellClass:[DEMOCustomAutoCompleteCell class]
                                        forCellReuseIdentifier:@"CustomCellId"];
+    
+}
+
+- (void)typeDidChange:(UISegmentedControl *)sender
+{
+    if(sender.selectedSegmentIndex == 0){
+        [self.autocompleteTextField setAutoCompleteTableAppearsAsKeyboardAccessory:NO];
+    } else {
+        [self.autocompleteTextField setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
+    }
     
 }
 
@@ -61,7 +78,7 @@
 {
     [UIView animateWithDuration:0.3
                           delay:0
-                        options:UIViewAnimationCurveEaseOut
+                        options:UIViewAnimationCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          CGPoint adjust;
                          switch (self.interfaceOrientation) {
@@ -79,6 +96,7 @@
                          [self.view setCenter:newCenter];
                          [self.author setAlpha:0];
                          [self.demoTitle setAlpha:0];
+                         [self.typeSwitch setAlpha:0];
                          
                      }
                      completion:nil];
@@ -89,7 +107,7 @@
 {
     [UIView animateWithDuration:0.3
                           delay:0
-                        options:UIViewAnimationCurveEaseOut
+                        options:UIViewAnimationCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          CGPoint adjust;
                          switch (self.interfaceOrientation) {
@@ -107,6 +125,7 @@
                          [self.view setCenter:newCenter];
                          [self.author setAlpha:1];
                          [self.demoTitle setAlpha:1];
+                         [self.typeSwitch setAlpha:1];
                      }
                      completion:nil];
     

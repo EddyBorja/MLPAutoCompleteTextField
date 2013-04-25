@@ -20,6 +20,8 @@
 static NSString *kSortInputStringKey = @"sortInputString";
 static NSString *kSortEditDistancesKey = @"editDistances";
 static NSString *kSortObjectKey = @"sortObject";
+static NSString *kKeyboardAccessoryInputKeyPath = @"autoCompleteTableAppearsAsKeyboardAccessory";
+
 @interface MLPAutoCompleteSortOperation: NSOperation
 @property (strong) NSString *incompleteString;
 @property (strong) NSArray *possibleCompletions;
@@ -55,7 +57,7 @@ static NSString *kAutoCompleteTableViewHiddenKeyPath = @"autoCompleteTableView.h
 static NSString *kBackgroundColorKeyPath = @"backgroundColor";
 static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCellIdentifier";
 @interface MLPAutoCompleteTextField ()
-@property (strong) UITableView *autoCompleteTableView;
+@property (strong, readwrite) UITableView *autoCompleteTableView;
 @property (strong) NSArray *autoCompleteSuggestions;
 @property (strong) NSOperationQueue *autoCompleteSortQueue;
 @property (strong) NSOperationQueue *autoCompleteFetchQueue;
@@ -136,6 +138,10 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
            forKeyPath:kBackgroundColorKeyPath
               options:NSKeyValueObservingOptionNew context:nil];
     
+    [self addObserver:self
+           forKeyPath:kKeyboardAccessoryInputKeyPath
+              options:NSKeyValueObservingOptionNew context:nil];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textFieldDidChangeWithNotification:)
@@ -149,6 +155,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     [self removeObserver:self forKeyPath:kBorderStyleKeyPath];
     [self removeObserver:self forKeyPath:kAutoCompleteTableViewHiddenKeyPath];
     [self removeObserver:self forKeyPath:kBackgroundColorKeyPath];
+    [self removeObserver:self forKeyPath:kKeyboardAccessoryInputKeyPath];
 }
 
 
@@ -164,6 +171,14 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
         }
     } else if ([keyPath isEqualToString:kBackgroundColorKeyPath]){
         [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
+    } else if ([keyPath isEqualToString:kKeyboardAccessoryInputKeyPath]){
+        if(self.autoCompleteTableAppearsAsKeyboardAccessory){
+            [self resetKeyboardAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
+            [self setInputAccessoryView:self.autoCompleteTableView];
+        } else {
+            [self resetDropDownAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
+            [self setInputAccessoryView:nil];
+        }
     }
 }
 
@@ -262,7 +277,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self closeAutoCompleteTableView];
+    if(!self.autoCompleteTableAppearsAsKeyboardAccessory){
+        [self closeAutoCompleteTableView];
+    }
+    
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *autoCompleteString = selectedCell.textLabel.text;
     self.text = autoCompleteString;
@@ -326,9 +344,11 @@ withAutoCompleteString:(NSString *)string
 {    
     [self saveCurrentShadowProperties];
     
-    if(self.showAutoCompleteTableWhenEditingBegins){
+    if(self.showAutoCompleteTableWhenEditingBegins ||
+       self.autoCompleteTableAppearsAsKeyboardAccessory){
         [self fetchAutoCompleteSuggestions];
     }
+    
     
     return [super becomeFirstResponder];
 }
@@ -341,7 +361,9 @@ withAutoCompleteString:(NSString *)string
 - (BOOL)resignFirstResponder
 {
     [self restoreOriginalShadowProperties];
-    [self closeAutoCompleteTableView];
+    if(!self.autoCompleteTableAppearsAsKeyboardAccessory){
+        [self closeAutoCompleteTableView];
+    }
     return [super resignFirstResponder];
 }
 
@@ -358,25 +380,31 @@ withAutoCompleteString:(NSString *)string
         return;
     }
     
-    [self.autoCompleteTableView.layer setCornerRadius:self.autoCompleteTableCornerRadius];
-    [self.autoCompleteTableView setContentInset:self.autoCompleteContentInsets];
-    [self.autoCompleteTableView setScrollIndicatorInsets:self.autoCompleteScrollIndicatorInsets];
-    
-    [self.autoCompleteTableView.layer setBorderColor:[self.autoCompleteTableBorderColor CGColor]];
-    [self.autoCompleteTableView.layer setBorderWidth:self.autoCompleteTableBorderWidth];
-    
-    CGRect newAutoCompleteTableViewFrame = [[self class]
-                                            autoCompleteTableViewFrameForTextField:self
-                                            forNumberOfRows:numberOfRows];
-    
-    if(self.backgroundColor){
-        [self.autoCompleteTableView setBackgroundColor:self.autoCompleteTableBackgroundColor];
+    if(self.autoCompleteTableAppearsAsKeyboardAccessory){
+        [self expandKeyboardAutoCompleteTableForNumberOfRows:numberOfRows];
+    } else {
+        [self expandDropDownAutoCompleteTableForNumberOfRows:numberOfRows];
     }
     
-    [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
-    [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
+
+- (void)expandKeyboardAutoCompleteTableForNumberOfRows:(NSInteger)numberOfRows
+{
+    if(numberOfRows && (self.autoCompleteTableViewHidden == NO)){
+        [self.autoCompleteTableView setAlpha:1];
+    } else {
+        [self.autoCompleteTableView setAlpha:0];
+    }
+}
+
+- (void)expandDropDownAutoCompleteTableForNumberOfRows:(NSInteger)numberOfRows
+{
+    [self resetDropDownAutoCompleteTableFrameForNumberOfRows:numberOfRows];
+    
     
     if(numberOfRows && (self.autoCompleteTableViewHidden == NO)){
+        [self.autoCompleteTableView setAlpha:1];
+        
         if(!self.autoCompleteTableView.superview){
             if([self.autoCompleteDelegate
                 respondsToSelector:@selector(autoCompleteTextField:willShowAutoCompleteTableView:)]){
@@ -402,7 +430,6 @@ withAutoCompleteString:(NSString *)string
 }
 
 
-
 - (void)closeAutoCompleteTableView
 {
     [self.autoCompleteTableView removeFromSuperview];
@@ -411,6 +438,8 @@ withAutoCompleteString:(NSString *)string
 
 
 #pragma mark - Setters
+
+
 
 - (void)setDefaultValuesForVariables
 {
@@ -442,6 +471,48 @@ withAutoCompleteString:(NSString *)string
     [self.autoCompleteTableView setHidden:autoCompleteTableViewHidden];
 }
 
+
+- (void)resetKeyboardAutoCompleteTableFrameForNumberOfRows:(NSInteger)numberOfRows
+{
+    [self.autoCompleteTableView.layer setCornerRadius:0];
+    [self.autoCompleteTableView setContentInset:UIEdgeInsetsZero];
+    [self.autoCompleteTableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+    
+    [self.autoCompleteTableView.layer setBorderColor:[self.autoCompleteTableBorderColor CGColor]];
+    [self.autoCompleteTableView.layer setBorderWidth:self.autoCompleteTableBorderWidth];
+    
+    
+    CGRect newAutoCompleteTableViewFrame = [[self class]
+                                            autoCompleteTableViewFrameForTextField:self
+                                            forNumberOfRows:numberOfRows];
+    [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
+    
+    [self.autoCompleteTableView setContentInset:UIEdgeInsetsZero];
+    [self.autoCompleteTableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+    [self.autoCompleteTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
+
+- (void)resetDropDownAutoCompleteTableFrameForNumberOfRows:(NSInteger)numberOfRows
+{
+    [self.autoCompleteTableView.layer setCornerRadius:self.autoCompleteTableCornerRadius];
+    [self.autoCompleteTableView setContentInset:self.autoCompleteContentInsets];
+    [self.autoCompleteTableView setScrollIndicatorInsets:self.autoCompleteScrollIndicatorInsets];
+    
+    [self.autoCompleteTableView.layer setBorderColor:[self.autoCompleteTableBorderColor CGColor]];
+    [self.autoCompleteTableView.layer setBorderWidth:self.autoCompleteTableBorderWidth];
+    
+    CGRect newAutoCompleteTableViewFrame = [[self class]
+                                            autoCompleteTableViewFrameForTextField:self
+                                            forNumberOfRows:numberOfRows];
+    
+    if(self.backgroundColor){
+        [self.autoCompleteTableView setBackgroundColor:self.autoCompleteTableBackgroundColor];
+    }
+    
+    [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
+    [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
 
 - (void)registerAutoCompleteCellNib:(UINib *)nib forCellReuseIdentifier:(NSString *)reuseIdentifier
 {
