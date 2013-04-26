@@ -1,6 +1,6 @@
 /*
  //  MLPAutoCompleteTextField.m
- //  
+ //
  //
  //  Created by Eddy Borja on 12/29/12.
  //  Copyright (c) 2013 Mainloop LLC. All rights reserved.
@@ -10,7 +10,7 @@
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ */
 
 #import "MLPAutoCompleteTextField.h"
 #import "MLPAutoCompletionObject.h"
@@ -34,7 +34,7 @@ static NSString *kKeyboardAccessoryInputKeyPath = @"autoCompleteTableAppearsAsKe
    possibleCompletions:(NSArray *)possibleStrings;
 
 - (NSArray *)sortedCompletionsForString:(NSString *)inputString
-                          withPossibleStrings:(NSArray *)possibleTerms;
+                    withPossibleStrings:(NSArray *)possibleTerms;
 @end
 
 static NSString *kFetchedTermsKey = @"terms";
@@ -113,7 +113,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     
     [self setDefaultValuesForVariables];
     
-    UITableView *newTableView = [[self class] newAutoCompleteTableViewForTextField:self];    
+    UITableView *newTableView = [[self class] newAutoCompleteTableViewForTextField:self];
     [self setAutoCompleteTableView:newTableView];
     
     [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
@@ -173,15 +173,12 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
         [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
     } else if ([keyPath isEqualToString:kKeyboardAccessoryInputKeyPath]){
         if(self.autoCompleteTableAppearsAsKeyboardAccessory){
-            [self resetKeyboardAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
-            [self setInputAccessoryView:self.autoCompleteTableView];
+            [self setAutoCompleteTableForKeyboardAppearance];
         } else {
-            [self resetDropDownAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
-            [self setInputAccessoryView:nil];
+            [self setAutoCompleteTableForDropDownAppearance];
         }
     }
 }
-
 
 #pragma mark - TableView Datasource
 
@@ -246,9 +243,14 @@ withAutoCompleteString:(NSString *)string
         boldedString = [self boldedString:string withRange:boldedRange];
     }
     
-    if([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:shouldConfigureCell:withAutoCompleteString:withAttributedString:forRowAtIndexPath:)])
+    id autoCompleteObject = self.autoCompleteSuggestions[indexPath.row];
+    if(![autoCompleteObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
+        autoCompleteObject = nil;
+    }
+    
+    if([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:shouldConfigureCell:withAutoCompleteString:withAttributedString:forAutoCompleteObject:forRowAtIndexPath:)])
     {
-        if(![self.autoCompleteDelegate autoCompleteTextField:self shouldConfigureCell:cell withAutoCompleteString:string withAttributedString:boldedString forRowAtIndexPath:indexPath])
+        if(![self.autoCompleteDelegate autoCompleteTextField:self shouldConfigureCell:cell withAutoCompleteString:string withAttributedString:boldedString forAutoCompleteObject:autoCompleteObject forRowAtIndexPath:indexPath])
         {
             return;
         }
@@ -266,6 +268,11 @@ withAutoCompleteString:(NSString *)string
     if(self.autoCompleteTableCellTextColor){
         [cell.textLabel setTextColor:self.autoCompleteTableCellTextColor];
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:self.autoCompleteTableCellBackgroundColor];
 }
 
 #pragma mark - TableView Delegate
@@ -341,7 +348,7 @@ withAutoCompleteString:(NSString *)string
 }
 
 - (BOOL)becomeFirstResponder
-{    
+{
     [self saveCurrentShadowProperties];
     
     if(self.showAutoCompleteTableWhenEditingBegins ||
@@ -451,6 +458,8 @@ withAutoCompleteString:(NSString *)string
     [self setAutoCompleteFontSize:13];
     [self setMaximumNumberOfAutoCompleteRows:3];
     
+    [self setAutoCompleteTableCellBackgroundColor:[UIColor clearColor]];
+    
     UIFont *regularFont = [UIFont systemFontOfSize:13];
     [self setAutoCompleteRegularFontName:regularFont.fontName];
     
@@ -461,34 +470,74 @@ withAutoCompleteString:(NSString *)string
     
     [self setAutoCompleteSortQueue:[NSOperationQueue new]];
     self.autoCompleteSortQueue.name = [NSString stringWithFormat:@"Autocomplete Queue %i", arc4random()];
-
+    
     [self setAutoCompleteFetchQueue:[NSOperationQueue new]];
     self.autoCompleteFetchQueue.name = [NSString stringWithFormat:@"Fetch Queue %i", arc4random()];
 }
+
+
+- (void)setAutoCompleteTableForKeyboardAppearance
+{
+    [self resetKeyboardAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
+    [self.autoCompleteTableView setContentInset:UIEdgeInsetsZero];
+    [self.autoCompleteTableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+    [self setInputAccessoryView:self.autoCompleteTableView];
+}
+
+- (void)setAutoCompleteTableForDropDownAppearance
+{
+    [self resetDropDownAutoCompleteTableFrameForNumberOfRows:self.maximumNumberOfAutoCompleteRows];
+    [self.autoCompleteTableView setContentInset:self.autoCompleteContentInsets];
+    [self.autoCompleteTableView setScrollIndicatorInsets:self.autoCompleteScrollIndicatorInsets];
+    [self setInputAccessoryView:nil];
+}
+
+
 
 - (void)setAutoCompleteTableViewHidden:(BOOL)autoCompleteTableViewHidden
 {
     [self.autoCompleteTableView setHidden:autoCompleteTableViewHidden];
 }
 
+- (void)setAutoCompleteTableBackgroundColor:(UIColor *)autoCompleteTableBackgroundColor
+{
+    [self.autoCompleteTableView setBackgroundColor:autoCompleteTableBackgroundColor];
+    _autoCompleteTableBackgroundColor = autoCompleteTableBackgroundColor;
+}
+
+- (void)setAutoCompleteTableBorderWidth:(CGFloat)autoCompleteTableBorderWidth
+{
+    [self.autoCompleteTableView.layer setBorderWidth:autoCompleteTableBorderWidth];
+    _autoCompleteTableBorderWidth = autoCompleteTableBorderWidth;
+}
+
+- (void)setAutoCompleteTableBorderColor:(UIColor *)autoCompleteTableBorderColor
+{
+    [self.autoCompleteTableView.layer setBorderColor:[autoCompleteTableBorderColor CGColor]];
+    _autoCompleteTableBorderColor = autoCompleteTableBorderColor;
+}
+
+- (void)setAutoCompleteContentInsets:(UIEdgeInsets)autoCompleteContentInsets
+{
+    [self.autoCompleteTableView setContentInset:autoCompleteContentInsets];
+    _autoCompleteContentInsets = autoCompleteContentInsets;
+}
+
+- (void)setAutoCompleteScrollIndicatorInsets:(UIEdgeInsets)autoCompleteScrollIndicatorInsets
+{
+    [self.autoCompleteTableView setScrollIndicatorInsets:autoCompleteScrollIndicatorInsets];
+    _autoCompleteScrollIndicatorInsets = autoCompleteScrollIndicatorInsets;
+}
 
 - (void)resetKeyboardAutoCompleteTableFrameForNumberOfRows:(NSInteger)numberOfRows
 {
     [self.autoCompleteTableView.layer setCornerRadius:0];
-    [self.autoCompleteTableView setContentInset:UIEdgeInsetsZero];
-    [self.autoCompleteTableView setScrollIndicatorInsets:UIEdgeInsetsZero];
-    
-    [self.autoCompleteTableView.layer setBorderColor:[self.autoCompleteTableBorderColor CGColor]];
-    [self.autoCompleteTableView.layer setBorderWidth:self.autoCompleteTableBorderWidth];
-    
     
     CGRect newAutoCompleteTableViewFrame = [[self class]
                                             autoCompleteTableViewFrameForTextField:self
                                             forNumberOfRows:numberOfRows];
     [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
     
-    [self.autoCompleteTableView setContentInset:UIEdgeInsetsZero];
-    [self.autoCompleteTableView setScrollIndicatorInsets:UIEdgeInsetsZero];
     [self.autoCompleteTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 }
@@ -496,19 +545,10 @@ withAutoCompleteString:(NSString *)string
 - (void)resetDropDownAutoCompleteTableFrameForNumberOfRows:(NSInteger)numberOfRows
 {
     [self.autoCompleteTableView.layer setCornerRadius:self.autoCompleteTableCornerRadius];
-    [self.autoCompleteTableView setContentInset:self.autoCompleteContentInsets];
-    [self.autoCompleteTableView setScrollIndicatorInsets:self.autoCompleteScrollIndicatorInsets];
-    
-    [self.autoCompleteTableView.layer setBorderColor:[self.autoCompleteTableBorderColor CGColor]];
-    [self.autoCompleteTableView.layer setBorderWidth:self.autoCompleteTableBorderWidth];
     
     CGRect newAutoCompleteTableViewFrame = [[self class]
                                             autoCompleteTableViewFrameForTextField:self
                                             forNumberOfRows:numberOfRows];
-    
-    if(self.backgroundColor){
-        [self.autoCompleteTableView setBackgroundColor:self.autoCompleteTableBackgroundColor];
-    }
     
     [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
     [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
@@ -666,8 +706,8 @@ withAutoCompleteString:(NSString *)string
     
     MLPAutoCompleteFetchOperation *fetchOperation = [[MLPAutoCompleteFetchOperation alloc]
                                                      initWithDelegate:self
-                                                completionsDataSource:self.autoCompleteDataSource
-                                                autoCompleteTextField:self];
+                                                     completionsDataSource:self.autoCompleteDataSource
+                                                     autoCompleteTextField:self];
     [self.autoCompleteFetchQueue addOperation:fetchOperation];
 }
 
@@ -694,6 +734,20 @@ withAutoCompleteString:(NSString *)string
 {
     CGRect newTableViewFrame = [[self class] autoCompleteTableViewFrameForTextField:textField];
     
+    CGFloat height = [[self class] autoCompleteTableHeightForTextField:textField
+                                                      withNumberOfRows:numberOfRows];
+    newTableViewFrame.size.height = height;
+    
+    if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
+        newTableViewFrame.size.height += textField.autoCompleteTableView.contentInset.top;
+    }
+    
+    return newTableViewFrame;
+}
+
++ (CGFloat)autoCompleteTableHeightForTextField:(MLPAutoCompleteTextField *)textField
+                              withNumberOfRows:(NSInteger)numberOfRows
+{
     CGFloat maximumHeightMultiplier = (textField.maximumNumberOfAutoCompleteRows - 0.5);
     CGFloat heightMultiplier;
     if(numberOfRows >= textField.maximumNumberOfAutoCompleteRows){
@@ -702,10 +756,8 @@ withAutoCompleteString:(NSString *)string
         heightMultiplier = numberOfRows;
     }
     
-    newTableViewFrame.size.height = textField.autoCompleteRowHeight * heightMultiplier;
-    newTableViewFrame.size.height += textField.autoCompleteTableView.contentInset.top;
-    
-    return newTableViewFrame;
+    CGFloat height = textField.autoCompleteRowHeight * heightMultiplier;
+    return height;
 }
 
 + (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
@@ -767,7 +819,7 @@ withAutoCompleteString:(NSString *)string
         if (self.isCancelled){
             return;
         }
-    
+        
         NSArray *results = [self.dataSource autoCompleteTextField:self.textField
                                      possibleCompletionsForString:self.incompleteString];
         if(results.count){
@@ -786,8 +838,8 @@ withAutoCompleteString:(NSString *)string
                                           kFetchedStringKey : self.incompleteString};
             [(NSObject *)self.delegate
              performSelectorOnMainThread:@selector(autoCompleteTermsDidFetch:)
-                              withObject:resultsInfo
-                           waitUntilDone:NO];
+             withObject:resultsInfo
+             waitUntilDone:NO];
         }
     }
 }
@@ -802,6 +854,10 @@ withAutoCompleteString:(NSString *)string
         [self setTextField:aTextField];
         [self setDataSource:aDataSource];
         [self setIncompleteString:aTextField.text];
+        
+        if(!self.incompleteString){
+            self.incompleteString = @"";
+        }
     }
     return self;
 }
@@ -819,7 +875,7 @@ withAutoCompleteString:(NSString *)string
 
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark - MLPAutoCompleteSortOperation
 
 @implementation MLPAutoCompleteSortOperation
@@ -842,8 +898,8 @@ withAutoCompleteString:(NSString *)string
         if(!self.isCancelled){
             [(NSObject *)self.delegate
              performSelectorOnMainThread:@selector(autoCompleteTermsDidSort:)
-                              withObject:results
-                           waitUntilDone:NO];
+             withObject:results
+             waitUntilDone:NO];
         }
     }
 }

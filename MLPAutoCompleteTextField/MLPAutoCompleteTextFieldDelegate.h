@@ -29,7 +29,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
           shouldConfigureCell:(UITableViewCell *)cell
        withAutoCompleteString:(NSString *)autocompleteString
          withAttributedString:(NSAttributedString *)boldedString
+        forAutoCompleteObject:(id<MLPAutoCompletionObject>)autocompleteObject
             forRowAtIndexPath:(NSIndexPath *)indexPath;
+
 
 /*IndexPath corresponds to the order of strings within the autocomplete table,
 not the original data source.

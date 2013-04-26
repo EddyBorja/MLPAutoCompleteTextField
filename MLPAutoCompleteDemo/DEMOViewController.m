@@ -55,6 +55,7 @@
     
     //[self.autocompleteTextField setMaximumNumberOfAutoCompleteRows:4];
 
+    //[self.autocompleteTextField setAutoCompleteTableBackgroundColor:[UIColor colorWithWhite:1 alpha:0.5]];
     
     //You can use custom TableViewCell classes and nibs in the autocomplete tableview if you wish.
     [self.autocompleteTextField registerAutoCompleteCellClass:[DEMOCustomAutoCompleteCell class]
@@ -456,6 +457,7 @@
           shouldConfigureCell:(UITableViewCell *)cell
        withAutoCompleteString:(NSString *)autocompleteString
          withAttributedString:(NSAttributedString *)boldedString
+        forAutoCompleteObject:(id<MLPAutoCompletionObject>)autocompleteObject
             forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     //This is your chance to customize an autocomplete tableview cell before it appears in the autocomplete tableview
