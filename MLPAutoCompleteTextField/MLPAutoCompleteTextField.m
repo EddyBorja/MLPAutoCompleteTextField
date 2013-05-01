@@ -920,7 +920,7 @@ withAutoCompleteString:(NSString *)string
 - (NSArray *)sortedCompletionsForString:(NSString *)inputString withPossibleStrings:(NSArray *)possibleTerms
 {
     if([inputString isEqualToString:@""]){
-        return [NSArray array];
+        return possibleTerms;
     }
     
     if(self.isCancelled){

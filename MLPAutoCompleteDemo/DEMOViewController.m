@@ -52,9 +52,8 @@
     //[self.autocompleteTextField setBorderStyle:UITextBorderStyleLine];
     //[self.autocompleteTextField setBorderStyle:UITextBorderStyleNone];
     [self.autocompleteTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    
-    //[self.autocompleteTextField setMaximumNumberOfAutoCompleteRows:4];
 
+    //[self.autocompleteTextField setShowAutoCompleteTableWhenEditingBegins:YES];
     //[self.autocompleteTextField setAutoCompleteTableBackgroundColor:[UIColor colorWithWhite:1 alpha:0.5]];
     
     //You can use custom TableViewCell classes and nibs in the autocomplete tableview if you wish.
