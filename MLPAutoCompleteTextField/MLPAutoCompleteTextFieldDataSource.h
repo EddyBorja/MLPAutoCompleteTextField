@@ -17,14 +17,30 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class MLPAutoCompleteTextField;
 @protocol MLPAutoCompleteTextFieldDataSource <NSObject>
 
-@required
+
+@optional
+//One of these two methods must be implemented to fetch autocomplete terms.
+
 
 /*
- This method should return an NSArray of strings that could be used as possible completions
- for the given string in textField.
+ When you have the suggestions ready you must call the completionHandler block with 
+ an NSArray of strings or objects implementing the MLPAutoCompletionObject protocol that 
+ could be used as possible completions for the given string in textField.
+ */
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+      possibleCompletionsForString:(NSString *)string
+                 completionHandler:(void(^)(NSArray *suggestions))handler;
+
+
+
+/*
+ Like the above, this method should return an NSArray of strings or objects implementing the MLPAutoCompletionObject protocol
+ that could be used as possible completions for the given string in textField.
 This method will be called asynchronously, so an immediate return is not necessary.
  */
 - (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
       possibleCompletionsForString:(NSString *)string;
+
+
 
 @end

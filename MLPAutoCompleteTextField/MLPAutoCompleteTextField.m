@@ -17,10 +17,12 @@
 #import "NSString+Levenshtein.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 static NSString *kSortInputStringKey = @"sortInputString";
 static NSString *kSortEditDistancesKey = @"editDistances";
 static NSString *kSortObjectKey = @"sortObject";
 static NSString *kKeyboardAccessoryInputKeyPath = @"autoCompleteTableAppearsAsKeyboardAccessory";
+const NSTimeInterval DefaultAutoCompleteRequestDelay = 0.1;
 
 @interface MLPAutoCompleteSortOperation: NSOperation
 @property (strong) NSString *incompleteString;
@@ -236,6 +238,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
           atIndexPath:(NSIndexPath *)indexPath
 withAutoCompleteString:(NSString *)string
 {
+    
     NSAttributedString *boldedString = nil;
     if(self.applyBoldEffectToAutoCompleteSuggestions){
         NSRange boldedRange = [[string lowercaseString]
@@ -343,7 +346,13 @@ withAutoCompleteString:(NSString *)string
 - (void)textFieldDidChangeWithNotification:(NSNotification *)aNotification
 {
     if(aNotification.object == self){
-        [self fetchAutoCompleteSuggestions];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(fetchAutoCompleteSuggestions)
+                                                   object:nil];
+        
+        [self performSelector:@selector(fetchAutoCompleteSuggestions)
+                   withObject:nil
+                   afterDelay:self.autoCompleteFetchRequestDelay];
     }
 }
 
@@ -355,7 +364,6 @@ withAutoCompleteString:(NSString *)string
        self.autoCompleteTableAppearsAsKeyboardAccessory){
         [self fetchAutoCompleteSuggestions];
     }
-    
     
     return [super becomeFirstResponder];
 }
@@ -451,6 +459,7 @@ withAutoCompleteString:(NSString *)string
 - (void)setDefaultValuesForVariables
 {
     [self setClipsToBounds:NO];
+    [self setAutoCompleteFetchRequestDelay:DefaultAutoCompleteRequestDelay];
     [self setSortAutoCompleteSuggestionsByClosestMatch:YES];
     [self setApplyBoldEffectToAutoCompleteSuggestions:YES];
     [self setShowTextFieldDropShadowWhenAutoCompleteTableIsOpen:YES];
@@ -698,6 +707,7 @@ withAutoCompleteString:(NSString *)string
 
 - (void)fetchAutoCompleteSuggestions
 {
+    
     if(self.disableAutoCompleteTableUserInteractionWhileFetching){
         [self.autoCompleteTableView setUserInteractionEnabled:NO];
     }
@@ -705,9 +715,10 @@ withAutoCompleteString:(NSString *)string
     [self.autoCompleteFetchQueue cancelAllOperations];
     
     MLPAutoCompleteFetchOperation *fetchOperation = [[MLPAutoCompleteFetchOperation alloc]
-                                                     initWithDelegate:self
-                                                     completionsDataSource:self.autoCompleteDataSource
-                                                     autoCompleteTextField:self];
+                                                        initWithDelegate:self
+                                                        completionsDataSource:self.autoCompleteDataSource
+                                                        autoCompleteTextField:self];
+    
     [self.autoCompleteFetchQueue addOperation:fetchOperation];
 }
 
@@ -820,28 +831,59 @@ withAutoCompleteString:(NSString *)string
             return;
         }
         
-        NSArray *results = [self.dataSource autoCompleteTextField:self.textField
-                                     possibleCompletionsForString:self.incompleteString];
-        if(results.count){
-            NSObject *firstObject = results[0];
+
+        if([self.dataSource respondsToSelector:@selector(autoCompleteTextField:possibleCompletionsForString:completionHandler:)]){
+            
+            __block BOOL waitingForSuggestions = YES;
+            __weak MLPAutoCompleteFetchOperation *operation = self;
+            [self.dataSource autoCompleteTextField:self.textField
+                      possibleCompletionsForString:self.incompleteString
+                                 completionHandler:^(NSArray *suggestions){
+                                     
+                                    [operation performSelector:@selector(didReceiveSuggestions:) withObject:suggestions];
+                                    waitingForSuggestions = NO;
+                                 }];
+            
+            while(waitingForSuggestions){
+                if(self.isCancelled){
+                    return;
+                }
+            }
+            
+        } else if ([self.dataSource respondsToSelector:@selector(autoCompleteTextField:possibleCompletionsForString:)]){
+            
+            NSArray *results = [self.dataSource autoCompleteTextField:self.textField
+                                possibleCompletionsForString:self.incompleteString];
+            
+            if(!self.isCancelled){
+                [self didReceiveSuggestions:results];
+            }
+            
+        } else {
+            NSAssert(0, @"An autocomplete datasource must implement either autoCompleteTextField:possibleCompletionsForString: or autoCompleteTextField:possibleCompletionsForString:completionHandler:");
+        }
+        
+    }
+}
+
+- (void)didReceiveSuggestions:(NSArray *)suggestions
+{
+    if(!self.isCancelled){
+        
+        if(suggestions.count){
+            NSObject *firstObject = suggestions[0];
             NSAssert([firstObject isKindOfClass:[NSString class]] ||
                      [firstObject conformsToProtocol:@protocol(MLPAutoCompletionObject)],
                      @"MLPAutoCompleteTextField expects an array with objects that are either strings or conform to the MLPAutoCompletionObject protocol for possible completions.");
         }
         
-        if (self.isCancelled){
-            return;
-        }
-        
-        if(!self.isCancelled){
-            NSDictionary *resultsInfo = @{kFetchedTermsKey: results,
-                                          kFetchedStringKey : self.incompleteString};
-            [(NSObject *)self.delegate
-             performSelectorOnMainThread:@selector(autoCompleteTermsDidFetch:)
-             withObject:resultsInfo
-             waitUntilDone:NO];
-        }
-    }
+        NSDictionary *resultsInfo = @{kFetchedTermsKey: suggestions,
+                                      kFetchedStringKey : self.incompleteString};
+        [(NSObject *)self.delegate
+         performSelectorOnMainThread:@selector(autoCompleteTermsDidFetch:)
+         withObject:resultsInfo
+         waitUntilDone:NO];
+    };
 }
 
 - (id)initWithDelegate:(id<MLPAutoCompleteFetchOperationDelegate>)aDelegate
@@ -930,12 +972,9 @@ withAutoCompleteString:(NSString *)string
     NSMutableArray *editDistances = [NSMutableArray arrayWithCapacity:possibleTerms.count];
     
     
-    float editDistanceOfCurrentString;
-    NSDictionary *stringsWithEditDistances;
-    NSUInteger maximumRange;
-    NSString *currentString;
     for(NSObject *originalObject in possibleTerms) {
         
+        NSString *currentString;
         if([originalObject isKindOfClass:[NSString class]]){
             currentString = (NSString *)originalObject;
         } else if ([originalObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
@@ -948,12 +987,12 @@ withAutoCompleteString:(NSString *)string
             return [NSArray array];
         }
         
-        maximumRange = (inputString.length < currentString.length) ? inputString.length : currentString.length;
-        editDistanceOfCurrentString = [inputString asciiLevenshteinDistanceWithString:[currentString substringWithRange:NSMakeRange(0, maximumRange)]];
+        NSUInteger maximumRange = (inputString.length < currentString.length) ? inputString.length : currentString.length;
+        float editDistanceOfCurrentString = [inputString asciiLevenshteinDistanceWithString:[currentString substringWithRange:NSMakeRange(0, maximumRange)]];
         
-        stringsWithEditDistances = @{kSortInputStringKey : currentString ,
-                                     kSortObjectKey : originalObject,
-                                     kSortEditDistancesKey : [NSNumber numberWithFloat:editDistanceOfCurrentString]};
+        NSDictionary * stringsWithEditDistances = @{kSortInputStringKey : currentString ,
+                                                         kSortObjectKey : originalObject,
+                                                  kSortEditDistancesKey : [NSNumber numberWithFloat:editDistanceOfCurrentString]};
         [editDistances addObject:stringsWithEditDistances];
     }
     
@@ -966,10 +1005,11 @@ withAutoCompleteString:(NSString *)string
         
         return [string1Dictionary[kSortEditDistancesKey]
                 compare:string2Dictionary[kSortEditDistancesKey]];
+        
     }];
     
     
-    NSString *suggestedString;
+    
     NSMutableArray *prioritySuggestions = [NSMutableArray array];
     NSMutableArray *otherSuggestions = [NSMutableArray array];
     for(NSDictionary *stringsWithEditDistances in editDistances){
@@ -978,16 +1018,31 @@ withAutoCompleteString:(NSString *)string
             return [NSArray array];
         }
         
-        suggestedString = stringsWithEditDistances[kSortInputStringKey];
         NSObject *autoCompleteObject = stringsWithEditDistances[kSortObjectKey];
-        NSRange occurrenceOfInputString = [[suggestedString lowercaseString]
-                                           rangeOfString:[inputString lowercaseString]];
+        NSString *suggestedString = stringsWithEditDistances[kSortInputStringKey];
+    
+        NSArray *suggestedStringComponents = [suggestedString componentsSeparatedByString:@" "];
+        BOOL suggestedStringDeservesPriority = NO;
+        for(NSString *component in suggestedStringComponents){
+            NSRange occurrenceOfInputString = [[component lowercaseString]
+                                            rangeOfString:[inputString lowercaseString]];
+            
+            if (occurrenceOfInputString.length != 0 && occurrenceOfInputString.location == 0) {
+                suggestedStringDeservesPriority = YES;
+                [prioritySuggestions addObject:autoCompleteObject];
+                break;
+            }
+    
+            if([inputString length] <= 1){
+                //if the input string is very short, don't check anymore components of the input string.
+                break;
+            }
+        }
         
-        if (occurrenceOfInputString.length != 0 && occurrenceOfInputString.location == 0) {
-            [prioritySuggestions addObject:autoCompleteObject];
-        } else{
+        if(!suggestedStringDeservesPriority){
             [otherSuggestions addObject:autoCompleteObject];
         }
+
     }
     
     NSMutableArray *results = [NSMutableArray array];
