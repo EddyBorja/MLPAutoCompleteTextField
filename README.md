@@ -40,7 +40,7 @@ CocoaPods are the best way to manage library dependencies in Objective-C project
 Learn more at http://cocoapods.org
 
 Add this to your podfile to add the MLPAutoCompleteTextField to your project.
-`pod 'MLPAutoCompleteTextField', '~> 1.3'`
+`pod 'MLPAutoCompleteTextField', '~> 1.4'`
 
 
 
