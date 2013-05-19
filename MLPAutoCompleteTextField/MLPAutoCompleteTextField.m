@@ -591,7 +591,7 @@ withAutoCompleteString:(NSString *)string
         [self unregisterAutoCompleteCellForReuseIdentifier:self.reuseIdentifier];
     }
     BOOL classSettingSupported = [self.autoCompleteTableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)];
-    NSAssert(classSettingSupported, @"Unable to set class for cell for autocomplete table, try setting it thorug a NIB instead of a class");
+    NSAssert(classSettingSupported, @"Unable to set class for cell for autocomplete table, in iOS 5.0 you can set a custom NIB for a reuse identifier to get similar functionality.");
     [self.autoCompleteTableView registerClass:cellClass forCellReuseIdentifier:reuseIdentifier];
     [self setReuseIdentifier:reuseIdentifier];
 }
