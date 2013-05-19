@@ -1073,6 +1073,7 @@
 		85FF059416B0874E009A94EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85FF059616B0874E009A94EE /* MLPAutoCompleteDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteDemoTests.h; sourceTree = "<group>"; };
 		85FF059716B0874E009A94EE /* MLPAutoCompleteDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLPAutoCompleteDemoTests.m; sourceTree = "<group>"; };
+		BC31C639174877BE0044B2A5 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1636,6 +1637,7 @@
 		85FF056516B0874D009A94EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC31C639174877BE0044B2A5 /* CoreText.framework */,
 				8559144B16C1CE35007F88DE /* QuartzCore.framework */,
 				85FF056616B0874D009A94EE /* UIKit.framework */,
 				85FF056816B0874D009A94EE /* Foundation.framework */,
@@ -2425,6 +2427,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2436,6 +2439,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

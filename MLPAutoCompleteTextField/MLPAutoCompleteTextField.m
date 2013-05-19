@@ -241,6 +241,8 @@ withAutoCompleteString:(NSString *)string
     
     NSAttributedString *boldedString = nil;
     if(self.applyBoldEffectToAutoCompleteSuggestions){
+        BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
+        NSAssert(attributedTextSupport, @"Attributed strings on UILabels are  not supported before iOS 6.0");
         NSRange boldedRange = [[string lowercaseString]
                                rangeOfString:[self.text lowercaseString]];
         boldedString = [self boldedString:string withRange:boldedRange];
@@ -262,7 +264,13 @@ withAutoCompleteString:(NSString *)string
     [cell.textLabel setTextColor:self.textColor];
     
     if(boldedString){
-        [cell.textLabel setAttributedText:boldedString];
+        if ([cell.textLabel respondsToSelector:@selector(setAttributedText:)]) {
+            [cell.textLabel setAttributedText:boldedString];
+        } else{
+            [cell.textLabel setText:string];
+            [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
+        }
+    
     } else {
         [cell.textLabel setText:string];
         [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
@@ -579,11 +587,11 @@ withAutoCompleteString:(NSString *)string
 - (void)registerAutoCompleteCellClass:(Class)cellClass forCellReuseIdentifier:(NSString *)reuseIdentifier
 {
     NSAssert(self.autoCompleteTableView, @"Must have an autoCompleteTableView to register cells to.");
-    
     if(self.reuseIdentifier){
         [self unregisterAutoCompleteCellForReuseIdentifier:self.reuseIdentifier];
     }
-    
+    BOOL classSettingSupported = [self.autoCompleteTableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)];
+    NSAssert(classSettingSupported, @"Unable to set class for cell for autocomplete table, in iOS 5.0 you can set a custom NIB for a reuse identifier to get similar functionality.");
     [self.autoCompleteTableView registerClass:cellClass forCellReuseIdentifier:reuseIdentifier];
     [self setReuseIdentifier:reuseIdentifier];
 }

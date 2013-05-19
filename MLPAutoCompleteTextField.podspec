@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MLPAutoCompleteTextField"
-  s.version      = "1.3"
+  s.version      = "1.5"
   s.summary      = "UITextfield subclass with autocomplete menu."
   s.homepage     = "https://github.com/EddyBorja/MLPAutoCompleteTextField"
   s.license      = { :type => 'MIT', :file => 'MIT_LICENSE.md' }
