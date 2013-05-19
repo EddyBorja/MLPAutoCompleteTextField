@@ -527,7 +527,6 @@
 		85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056816B0874D009A94EE /* Foundation.framework */; };
 		85FF059516B0874E009A94EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85FF059316B0874E009A94EE /* InfoPlist.strings */; };
 		85FF059816B0874E009A94EE /* MLPAutoCompleteDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF059716B0874E009A94EE /* MLPAutoCompleteDemoTests.m */; };
-		BC31C63A174877BE0044B2A5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC31C639174877BE0044B2A5 /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1082,7 +1081,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC31C63A174877BE0044B2A5 /* CoreText.framework in Frameworks */,
 				85FF056716B0874D009A94EE /* UIKit.framework in Frameworks */,
 				85FF056916B0874D009A94EE /* Foundation.framework in Frameworks */,
 				85FF056B16B0874D009A94EE /* CoreGraphics.framework in Frameworks */,
