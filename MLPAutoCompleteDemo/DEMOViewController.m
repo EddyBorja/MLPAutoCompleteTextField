@@ -57,8 +57,16 @@
     //[self.autocompleteTextField setAutoCompleteTableBackgroundColor:[UIColor colorWithWhite:1 alpha:0.5]];
     
     //You can use custom TableViewCell classes and nibs in the autocomplete tableview if you wish.
-    [self.autocompleteTextField registerAutoCompleteCellClass:[DEMOCustomAutoCompleteCell class]
-                                       forCellReuseIdentifier:@"CustomCellId"];
+    //This is only supported in iOS 6.0, in iOS 5.0 you can set a custom NIB for the cell
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending) {
+        [self.autocompleteTextField registerAutoCompleteCellClass:[DEMOCustomAutoCompleteCell class]
+                                           forCellReuseIdentifier:@"CustomCellId"];
+    }
+    else{
+        //Turn off bold effects on iOS 5.0 as they are not supported and will result in an exception
+        self.autocompleteTextField.applyBoldEffectToAutoCompleteSuggestions = NO;
+    }
+    
     
 }
 
