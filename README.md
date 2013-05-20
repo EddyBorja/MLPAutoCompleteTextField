@@ -8,6 +8,8 @@ About
 ---------
 _MLPAutoCompleteTextField_ is a subclass of _UITextField_ that behaves like a typical _UITextField_ with one notable exception: it manages a drop down table of autocomplete suggestions that update as the user types. Its behavior may remind you of Google's autocomplete search feature. As of version 1.3 there is also support for showing the autocomplete table as an accessory view of the keyboard.
 
+From version 1.5 and above _MLPAutoCompleteTextField_ is compatible with iOS 5.0 or greater. 
+
 ####Example:
   >A user is required to enter a long and complicated chemical name into a textfield. With an autocomplete textfield, chemical names that closely match her entered string can be displayed as she types, and if she sees the chemical name she was thinking of she can select it and have it entered into the textfield automatically. This reduces the amount of typing she has to do and helps prevent errors. All this can occur within a single view and without the need for a search tableview controller.
 
