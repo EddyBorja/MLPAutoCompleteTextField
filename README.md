@@ -149,3 +149,5 @@ Be sure to check out these other libraries:
 [MLPSpotlight](https://github.com/EddyBorja/MLPSpotlight)<br />
 [UIColor+MLPFlatColors](https://github.com/EddyBorja/UIColor-MLPFlatColors)<br />
 [MLPAccessoryBadge](https://github.com/EddyBorja/MLPAccessoryBadge)<br />
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/119b08c6f189ea6973d4cf1d35e09c4c "githalytics.com")](http://githalytics.com/EddyBorja/MLPAutoCompleteTextField)
