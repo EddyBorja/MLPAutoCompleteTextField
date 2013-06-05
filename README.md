@@ -140,3 +140,12 @@ _NSString+Levenshtein_ category extension was written by Mark Aufflick.
 If you make use of _MLPAutoCompleteTextField_, tell us about it! 
 Feel free to leave comments, likes, hatemail, etc at hello@mainloop.us
 
+
+
+More Stuff
+---------
+Be sure to check out these other libraries:
+
+[MLPSpotlight](https://github.com/EddyBorja/MLPSpotlight)<br />
+[UIColor+MLPFlatColors](https://github.com/EddyBorja/UIColor-MLPFlatColors)<br />
+[MLPAccessoryBadge](https://github.com/EddyBorja/MLPAccessoryBadge)<br />
