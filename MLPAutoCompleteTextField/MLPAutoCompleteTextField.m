@@ -876,6 +876,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)didReceiveSuggestions:(NSArray *)suggestions
 {
+    if(suggestions == nil){
+        suggestions = [NSArray array];
+    }
+    
     if(!self.isCancelled){
         
         if(suggestions.count){
