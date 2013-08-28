@@ -74,6 +74,10 @@ Known Issues
 What to Expect in Future Updates
 -----------
 
++ _iOS 7 Styling_: This class will be updated to match the design language of iOS 7 in iOS 7 apps.
+
++ _Horizontal Scrolling Suggestions_: There will be an option to display autocomplete terms in a slim, horizontally scrollable list above the keyboard, like the autocomplete on many Android devices.
+
 + _Weighted Suggestions_: In some cases, there may exist multiple autocomplete strings that are all equally possible completions for the current entered incomplete string. In current versions, the user will simply have to keep typing a few more characters to further narrow down the autocomplete suggestions to float the most probable string to the top of the autocomplete list.
 
   However, in the future you can expect to see a sort of "weighting" or "ranking" system, which will allow you to favor some strings over others by assigning a number to them. Strings with higher weight will appear closer to the top of the list of autocomplete suggestions. So even though a group of strings are all equally possible completions for a given incomplete string, the ones with higher weight are deemed as being the "more probable" matches and will be sorted accordingly. 
