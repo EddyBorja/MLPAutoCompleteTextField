@@ -19,7 +19,7 @@
     self.viewController = [[DEMOViewController alloc] initWithNibName:@"View" bundle:[NSBundle mainBundle]];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    [self customizeAppearance];
+    //[self customizeAppearance];
     [self.window.layer setCornerRadius:4];
     [self.window.layer setMasksToBounds:YES];
     [self.window setBackgroundColor:self.viewController.view.backgroundColor];
