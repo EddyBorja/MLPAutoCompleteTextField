@@ -226,7 +226,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 - (UITableViewCell *)autoCompleteTableViewCellWithReuseIdentifier:(NSString *)identifier
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                    reuseIdentifier:identifier];
     [cell setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setTextColor:self.textColor];
