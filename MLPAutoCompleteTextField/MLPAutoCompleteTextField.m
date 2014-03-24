@@ -115,7 +115,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     
     [self setDefaultValuesForVariables];
     
-    UITableView *newTableView = [[self class] newAutoCompleteTableViewForTextField:self];
+    UITableView *newTableView = [self newAutoCompleteTableViewForTextField:self];
     [self setAutoCompleteTableView:newTableView];
     
     [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
@@ -551,9 +551,7 @@ withAutoCompleteString:(NSString *)string
 {
     [self.autoCompleteTableView.layer setCornerRadius:0];
     
-    CGRect newAutoCompleteTableViewFrame = [[self class]
-                                            autoCompleteTableViewFrameForTextField:self
-                                            forNumberOfRows:numberOfRows];
+    CGRect newAutoCompleteTableViewFrame = [self autoCompleteTableViewFrameForTextField:self forNumberOfRows:numberOfRows];
     [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
     
     [self.autoCompleteTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -564,9 +562,7 @@ withAutoCompleteString:(NSString *)string
 {
     [self.autoCompleteTableView.layer setCornerRadius:self.autoCompleteTableCornerRadius];
     
-    CGRect newAutoCompleteTableViewFrame = [[self class]
-                                            autoCompleteTableViewFrameForTextField:self
-                                            forNumberOfRows:numberOfRows];
+    CGRect newAutoCompleteTableViewFrame = [self autoCompleteTableViewFrameForTextField:self forNumberOfRows:numberOfRows];
     
     [self.autoCompleteTableView setFrame:newAutoCompleteTableViewFrame];
     [self.autoCompleteTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
@@ -733,9 +729,9 @@ withAutoCompleteString:(NSString *)string
 
 #pragma mark - Factory Methods
 
-+ (UITableView *)newAutoCompleteTableViewForTextField:(MLPAutoCompleteTextField *)textField
+- (UITableView *)newAutoCompleteTableViewForTextField:(MLPAutoCompleteTextField *)textField
 {
-    CGRect dropDownTableFrame = [[self class] autoCompleteTableViewFrameForTextField:textField];
+    CGRect dropDownTableFrame = [self autoCompleteTableViewFrameForTextField:textField];
     
     UITableView *newTableView = [[UITableView alloc] initWithFrame:dropDownTableFrame
                                                              style:UITableViewStylePlain];
@@ -747,13 +743,12 @@ withAutoCompleteString:(NSString *)string
     return newTableView;
 }
 
-+ (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
+- (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
-    CGRect newTableViewFrame = [[self class] autoCompleteTableViewFrameForTextField:textField];
+    CGRect newTableViewFrame = [self autoCompleteTableViewFrameForTextField:textField];
     
-    CGFloat height = [[self class] autoCompleteTableHeightForTextField:textField
-                                                      withNumberOfRows:numberOfRows];
+    CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
     newTableViewFrame.size.height = height;
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
@@ -763,7 +758,7 @@ withAutoCompleteString:(NSString *)string
     return newTableViewFrame;
 }
 
-+ (CGFloat)autoCompleteTableHeightForTextField:(MLPAutoCompleteTextField *)textField
+- (CGFloat)autoCompleteTableHeightForTextField:(MLPAutoCompleteTextField *)textField
                               withNumberOfRows:(NSInteger)numberOfRows
 {
     CGFloat maximumHeightMultiplier = (textField.maximumNumberOfAutoCompleteRows - textField.partOfAutoCompleteRowHeightToCut);
@@ -778,10 +773,17 @@ withAutoCompleteString:(NSString *)string
     return height;
 }
 
-+ (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
+- (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
 {
-    CGRect frame = textField.frame;
-    frame.origin.y += textField.frame.size.height;
+    CGRect frame = CGRectZero;
+    
+    if (CGRectGetWidth(self.autoCompleteTableFrame) > 0){
+        frame = self.autoCompleteTableFrame;
+    } else {
+        frame = textField.frame;
+        frame.origin.y += textField.frame.size.height;
+    }
+    
     frame.origin.x += textField.autoCompleteTableOriginOffset.width;
     frame.origin.y += textField.autoCompleteTableOriginOffset.height;
     frame = CGRectInset(frame, 1, 0);
