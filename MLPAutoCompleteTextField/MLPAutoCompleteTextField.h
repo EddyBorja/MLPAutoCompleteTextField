@@ -68,6 +68,7 @@
 
 - (void)registerAutoCompleteCellClass:(Class)cellClass forCellReuseIdentifier:(NSString *)reuseIdentifier;
 
+- (void)reloadData; //it will ask DataSource for data again
 @end
 
 

@@ -354,13 +354,7 @@ withAutoCompleteString:(NSString *)string
 - (void)textFieldDidChangeWithNotification:(NSNotification *)aNotification
 {
     if(aNotification.object == self){
-        [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                                 selector:@selector(fetchAutoCompleteSuggestions)
-                                                   object:nil];
-        
-        [self performSelector:@selector(fetchAutoCompleteSuggestions)
-                   withObject:nil
-                   afterDelay:self.autoCompleteFetchRequestDelay];
+        [self reloadData];
     }
 }
 
@@ -699,6 +693,15 @@ withAutoCompleteString:(NSString *)string
     [self.layer setShadowOpacity:self.originalShadowOpacity];
 }
 
+- (void)reloadData {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(fetchAutoCompleteSuggestions)
+                                               object:nil];
+    
+    [self performSelector:@selector(fetchAutoCompleteSuggestions)
+               withObject:nil
+               afterDelay:self.autoCompleteFetchRequestDelay];
+}
 
 #pragma mark - Getters
 
