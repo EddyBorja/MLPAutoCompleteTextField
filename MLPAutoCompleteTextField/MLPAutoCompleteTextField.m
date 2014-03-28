@@ -276,6 +276,8 @@ withAutoCompleteString:(NSString *)string
         [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
     }
     
+    cell.accessibilityLabel = [NSString stringWithFormat:@"{%d,%d}",indexPath.section,indexPath.row];
+    
     if(self.autoCompleteTableCellTextColor){
         [cell.textLabel setTextColor:self.autoCompleteTableCellTextColor];
     }
