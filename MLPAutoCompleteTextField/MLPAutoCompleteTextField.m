@@ -234,6 +234,11 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     return cell;
 }
 
++ (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath
+{
+    return [NSString stringWithFormat:@"{%d,%d}",indexPath.section,indexPath.row];
+}
+
 - (void)configureCell:(UITableViewCell *)cell
           atIndexPath:(NSIndexPath *)indexPath
 withAutoCompleteString:(NSString *)string
@@ -275,6 +280,8 @@ withAutoCompleteString:(NSString *)string
         [cell.textLabel setText:string];
         [cell.textLabel setFont:[UIFont fontWithName:self.font.fontName size:self.autoCompleteFontSize]];
     }
+    
+    cell.accessibilityLabel = [[self class] accessibilityLabelForIndexPath:indexPath];
     
     if(self.autoCompleteTableCellTextColor){
         [cell.textLabel setTextColor:self.autoCompleteTableCellTextColor];

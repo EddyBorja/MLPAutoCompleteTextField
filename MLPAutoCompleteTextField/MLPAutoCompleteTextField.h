@@ -28,6 +28,8 @@
 
 @interface MLPAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, MLPAutoCompleteSortOperationDelegate, MLPAutoCompleteFetchOperationDelegate>
 
++ (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath;
+
 @property (strong, readonly) UITableView *autoCompleteTableView;
 
 @property (strong) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
