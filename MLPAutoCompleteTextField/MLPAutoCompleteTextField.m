@@ -837,7 +837,15 @@ withAutoCompleteString:(NSString *)string
 
 #pragma mark -
 #pragma mark - MLPAutoCompleteFetchOperation
-@implementation MLPAutoCompleteFetchOperation
+@implementation MLPAutoCompleteFetchOperation{
+    dispatch_semaphore_t sentinelSemaphore;
+}
+
+- (void) cancel
+{
+    dispatch_semaphore_signal(sentinelSemaphore);
+    [super cancel];
+}
 
 - (void)main
 {
@@ -847,25 +855,22 @@ withAutoCompleteString:(NSString *)string
             return;
         }
         
-
+        
         if([self.dataSource respondsToSelector:@selector(autoCompleteTextField:possibleCompletionsForString:completionHandler:)]){
-            
-            __block BOOL waitingForSuggestions = YES;
             __weak MLPAutoCompleteFetchOperation *operation = self;
+            sentinelSemaphore = dispatch_semaphore_create(0);
             [self.dataSource autoCompleteTextField:self.textField
                       possibleCompletionsForString:self.incompleteString
                                  completionHandler:^(NSArray *suggestions){
                                      
-                                    [operation performSelector:@selector(didReceiveSuggestions:) withObject:suggestions];
-                                    waitingForSuggestions = NO;
+                                     [operation performSelector:@selector(didReceiveSuggestions:) withObject:suggestions];
+                                     dispatch_semaphore_signal(sentinelSemaphore);
                                  }];
             
-            while(waitingForSuggestions){
-                if(self.isCancelled){
-                    return;
-                }
+            dispatch_semaphore_wait(sentinelSemaphore, DISPATCH_TIME_FOREVER);
+            if(self.isCancelled){
+                return;
             }
-            
         } else if ([self.dataSource respondsToSelector:@selector(autoCompleteTextField:possibleCompletionsForString:)]){
             
             NSArray *results = [self.dataSource autoCompleteTextField:self.textField
