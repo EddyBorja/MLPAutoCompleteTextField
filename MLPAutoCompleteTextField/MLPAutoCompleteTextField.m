@@ -248,8 +248,7 @@ withAutoCompleteString:(NSString *)string
     if(self.applyBoldEffectToAutoCompleteSuggestions){
         BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
         NSAssert(attributedTextSupport, @"Attributed strings on UILabels are  not supported before iOS 6.0");
-        NSRange boldedRange = [[string lowercaseString]
-                               rangeOfString:[self.text lowercaseString]];
+        NSRange boldedRange = [string rangeOfString:self.text options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
         boldedString = [self boldedString:string withRange:boldedRange];
     }
     
