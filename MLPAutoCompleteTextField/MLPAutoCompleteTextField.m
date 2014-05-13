@@ -437,7 +437,8 @@ withAutoCompleteString:(NSString *)string
         }
         
         [self.superview bringSubviewToFront:self];
-        [self.superview insertSubview:self.autoCompleteTableView
+        UIView *rootView = [self.window.subviews objectAtIndex:0];
+        [rootView insertSubview:self.autoCompleteTableView
                          belowSubview:self];
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
@@ -755,10 +756,14 @@ withAutoCompleteString:(NSString *)string
 - (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
-    CGRect newTableViewFrame = [self autoCompleteTableViewFrameForTextField:textField];
-    
+    CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
+    UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
+    CGRect textFieldFrameInContainerView = [rootView convertRect:textField.bounds
+                                                        fromView:textField];
+    CGFloat top    = textFieldFrameInContainerView.origin.y + textField.frame.size.height;
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
     newTableViewFrame.size.height = height;
+    newTableViewFrame.origin.y    = top;
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
         newTableViewFrame.size.height += textField.autoCompleteTableView.contentInset.top;
