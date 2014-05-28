@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4488.1" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DEMOViewController">
             <connections>
                 <outlet property="author" destination="46" id="159"/>
+                <outlet property="autocompleteDataSource" destination="VB6-HW-36j" id="mNJ-S8-DsH"/>
                 <outlet property="autocompleteTextField" destination="3" id="160"/>
                 <outlet property="demoTitle" destination="29" id="158"/>
                 <outlet property="typeSwitch" destination="194" id="205"/>
@@ -26,7 +27,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                     <connections>
-                        <outlet property="autoCompleteDataSource" destination="-1" id="161"/>
+                        <outlet property="autoCompleteDataSource" destination="VB6-HW-36j" id="Ayc-3l-Ozi"/>
                         <outlet property="autoCompleteDelegate" destination="-1" id="162"/>
                         <outlet property="delegate" destination="-1" id="68"/>
                     </connections>
@@ -69,5 +70,6 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <customObject id="VB6-HW-36j" userLabel="Autocomplete Datasource" customClass="DEMODataSource"/>
     </objects>
 </document>
