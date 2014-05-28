@@ -757,16 +757,20 @@ withAutoCompleteString:(NSString *)string
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
+    
     UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
     CGRect textFieldFrameInContainerView = [rootView convertRect:textField.bounds
                                                         fromView:textField];
-    CGFloat top    = textFieldFrameInContainerView.origin.y + textField.frame.size.height;
+    
+    CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
+    CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textfieldTopInset;
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
+    
     newTableViewFrame.size.height = height;
-    newTableViewFrame.origin.y    = top;
+    newTableViewFrame.origin.y    = converted_originY;
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
-        newTableViewFrame.size.height += textField.autoCompleteTableView.contentInset.top;
+        newTableViewFrame.size.height += textfieldTopInset;
     }
     
     return newTableViewFrame;
