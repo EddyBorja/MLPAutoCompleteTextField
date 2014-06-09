@@ -45,4 +45,7 @@ not the original data source.
 - (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
 willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView;
 
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+ didChangeNumberOfSuggestions:(NSInteger)numberOfSuggestions;
+
 @end

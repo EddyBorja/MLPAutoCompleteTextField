@@ -333,6 +333,12 @@ withAutoCompleteString:(NSString *)string
 {
     [self setAutoCompleteSuggestions:completions];
     [self.autoCompleteTableView reloadData];
+
+    if ([self.autoCompleteDelegate
+         respondsToSelector:@selector(autoCompleteTextField:didChangeNumberOfSuggestions:)]) {
+        [self.autoCompleteDelegate autoCompleteTextField:self
+                            didChangeNumberOfSuggestions:self.autoCompleteSuggestions.count];
+    }
 }
 
 #pragma mark - AutoComplete Fetch Operation Delegate
