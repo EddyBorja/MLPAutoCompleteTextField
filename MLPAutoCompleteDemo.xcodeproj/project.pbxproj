@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64AAFDD619361B30004EB079 /* DEMODataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AAFDD519361B30004EB079 /* DEMODataSource.m */; };
 		8559115416C19381007F88DE /* Nepal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559105A16C19380007F88DE /* Nepal@2x.png */; };
 		8559115516C19381007F88DE /* Switzerland@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559105B16C19380007F88DE /* Switzerland@2x.png */; };
 		8559115616C19381007F88DE /* Vanuatu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8559105C16C19380007F88DE /* Vanuatu@2x.png */; };
@@ -544,6 +545,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		64AAFDD419361B30004EB079 /* DEMODataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMODataSource.h; sourceTree = "<group>"; };
+		64AAFDD519361B30004EB079 /* DEMODataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMODataSource.m; sourceTree = "<group>"; };
 		8559105A16C19380007F88DE /* Nepal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Nepal@2x.png"; path = "Flags @2x/Nepal@2x.png"; sourceTree = "<group>"; };
 		8559105B16C19380007F88DE /* Switzerland@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Switzerland@2x.png"; path = "Flags @2x/Switzerland@2x.png"; sourceTree = "<group>"; };
 		8559105C16C19380007F88DE /* Vanuatu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Vanuatu@2x.png"; path = "Flags @2x/Vanuatu@2x.png"; sourceTree = "<group>"; };
@@ -1688,6 +1691,8 @@
 				85FF057616B0874D009A94EE /* DEMOAppDelegate.m */,
 				85FF057E16B0874D009A94EE /* DEMOViewController.h */,
 				85FF057F16B0874D009A94EE /* DEMOViewController.m */,
+				64AAFDD419361B30004EB079 /* DEMODataSource.h */,
+				64AAFDD519361B30004EB079 /* DEMODataSource.m */,
 				856E78561721E18B00932197 /* DEMOCustomAutoCompleteObject.h */,
 				856E78571721E18B00932197 /* DEMOCustomAutoCompleteObject.m */,
 				8559144816C1C2B7007F88DE /* DEMOCustomAutoCompleteCell.h */,
@@ -1793,6 +1798,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MLP;
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Mainloop;
 			};
@@ -2360,6 +2366,7 @@
 				85FF057316B0874D009A94EE /* main.m in Sources */,
 				85FF057716B0874D009A94EE /* DEMOAppDelegate.m in Sources */,
 				85FF058016B0874D009A94EE /* DEMOViewController.m in Sources */,
+				64AAFDD619361B30004EB079 /* DEMODataSource.m in Sources */,
 				8559144A16C1C2B8007F88DE /* DEMOCustomAutoCompleteCell.m in Sources */,
 				85EB411616C3488D000C193E /* MLPAutoCompleteTextField.m in Sources */,
 				85EB411716C3488D000C193E /* NSString+Levenshtein.m in Sources */,
