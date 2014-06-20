@@ -245,9 +245,8 @@ withAutoCompleteString:(NSString *)string
 {
     
     NSAttributedString *boldedString = nil;
-    if(self.applyBoldEffectToAutoCompleteSuggestions){
-        BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
-        NSAssert(attributedTextSupport, @"Attributed strings on UILabels are  not supported before iOS 6.0");
+    BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
+    if(attributedTextSupport && self.applyBoldEffectToAutoCompleteSuggestions){
         NSRange boldedRange = [string rangeOfString:self.text options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
         boldedString = [self boldedString:string withRange:boldedRange];
     }
