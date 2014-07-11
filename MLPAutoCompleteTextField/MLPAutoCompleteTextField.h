@@ -44,6 +44,7 @@
 @property (assign) BOOL showAutoCompleteTableWhenEditingBegins; //only applies for drop down style autocomplete tables.
 @property (assign) BOOL disableAutoCompleteTableUserInteractionWhileFetching;
 @property (assign) BOOL autoCompleteTableAppearsAsKeyboardAccessory; //if set to TRUE, the autocomplete table will appear as a keyboard input accessory view rather than a drop down.
+@property (assign) BOOL shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows; // default is TRUE
 
 
 @property (assign) BOOL autoCompleteTableViewHidden;

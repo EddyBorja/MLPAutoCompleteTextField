@@ -383,7 +383,9 @@ withAutoCompleteString:(NSString *)string
 
 - (void) finishedSearching
 {
-    [self resignFirstResponder];
+    if (self.shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows) {
+        [self resignFirstResponder];
+    }
 }
 
 - (BOOL)resignFirstResponder
@@ -477,6 +479,7 @@ withAutoCompleteString:(NSString *)string
     [self setSortAutoCompleteSuggestionsByClosestMatch:YES];
     [self setApplyBoldEffectToAutoCompleteSuggestions:YES];
     [self setShowTextFieldDropShadowWhenAutoCompleteTableIsOpen:YES];
+    [self shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows:YES];
     [self setAutoCompleteRowHeight:40];
     [self setAutoCompleteFontSize:13];
     [self setMaximumNumberOfAutoCompleteRows:3];
