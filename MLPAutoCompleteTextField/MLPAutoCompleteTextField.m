@@ -479,7 +479,7 @@ withAutoCompleteString:(NSString *)string
     [self setSortAutoCompleteSuggestionsByClosestMatch:YES];
     [self setApplyBoldEffectToAutoCompleteSuggestions:YES];
     [self setShowTextFieldDropShadowWhenAutoCompleteTableIsOpen:YES];
-    [self shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows:YES];
+    [self setShouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows:YES];
     [self setAutoCompleteRowHeight:40];
     [self setAutoCompleteFontSize:13];
     [self setMaximumNumberOfAutoCompleteRows:3];
