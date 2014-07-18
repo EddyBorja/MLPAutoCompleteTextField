@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A3847C46-35E5-4FE9-8566-1E1096A7B3AD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MLPAutoCompleteDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</key>
+		<string>https://github.com/EddyBorja/MLPAutoCompleteTextField.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MLPAutoCompleteDemo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/EddyBorja/MLPAutoCompleteTextField.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MLPAutoCompleteTextField</string>
+		</dict>
+	</array>
+</dict>
+</plist>

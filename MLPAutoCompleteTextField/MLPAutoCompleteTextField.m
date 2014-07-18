@@ -245,9 +245,8 @@ withAutoCompleteString:(NSString *)string
 {
     
     NSAttributedString *boldedString = nil;
-    if(self.applyBoldEffectToAutoCompleteSuggestions){
-        BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
-        NSAssert(attributedTextSupport, @"Attributed strings on UILabels are  not supported before iOS 6.0");
+    BOOL attributedTextSupport = [cell.textLabel respondsToSelector:@selector(setAttributedText:)];
+    if(attributedTextSupport && self.applyBoldEffectToAutoCompleteSuggestions){
         NSRange boldedRange = [string rangeOfString:self.text options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
         boldedString = [self boldedString:string withRange:boldedRange];
     }
@@ -333,6 +332,12 @@ withAutoCompleteString:(NSString *)string
 {
     [self setAutoCompleteSuggestions:completions];
     [self.autoCompleteTableView reloadData];
+
+    if ([self.autoCompleteDelegate
+         respondsToSelector:@selector(autoCompleteTextField:didChangeNumberOfSuggestions:)]) {
+        [self.autoCompleteDelegate autoCompleteTextField:self
+                            didChangeNumberOfSuggestions:self.autoCompleteSuggestions.count];
+    }
 }
 
 #pragma mark - AutoComplete Fetch Operation Delegate
@@ -378,7 +383,9 @@ withAutoCompleteString:(NSString *)string
 
 - (void) finishedSearching
 {
-    [self resignFirstResponder];
+    if (self.shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows) {
+        [self resignFirstResponder];
+    }
 }
 
 - (BOOL)resignFirstResponder
@@ -472,6 +479,7 @@ withAutoCompleteString:(NSString *)string
     [self setSortAutoCompleteSuggestionsByClosestMatch:YES];
     [self setApplyBoldEffectToAutoCompleteSuggestions:YES];
     [self setShowTextFieldDropShadowWhenAutoCompleteTableIsOpen:YES];
+    [self setShouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows:YES];
     [self setAutoCompleteRowHeight:40];
     [self setAutoCompleteFontSize:13];
     [self setMaximumNumberOfAutoCompleteRows:3];

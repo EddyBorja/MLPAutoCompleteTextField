@@ -18,7 +18,7 @@ Usage
 ---------
 The goal for _MLPAutoCompleteTextField_ is to create an autocomplete textfield that is quick and easy to use, yet eminently customizable. To get a working _MLPAutoCompleteTextField_ instance, ensure you have done the following:
 
-0. Add the _MLPAutoCompleteTextField_, _NSString+Levenshtein_, _MLPAutoCompleteDataSource_ and _MLPAutoCompleteTextFieldDelegate_ files into your project (should have six files in total). 
+0. Add the _MLPAutoCompleteTextField_, _NSString+Levenshtein_, _MLPAutoCompletionObject.h_, _MLPAutoCompleteDataSource_ and _MLPAutoCompleteTextFieldDelegate_ files into your project (should have seven files in total). 
 
 1. Have an _MLPAutoCompleteTextField_ instance allocated and initialized within some view.
 
