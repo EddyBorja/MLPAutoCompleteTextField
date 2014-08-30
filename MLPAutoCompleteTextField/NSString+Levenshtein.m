@@ -84,8 +84,8 @@ int smallestOf(int a, int b, int c);
     // Step 1
     int k, i, j, cost, * d, distance;
     
-    int n = [dataA length];
-    int m = [dataB length];
+    NSUInteger n = [dataA length];
+    NSUInteger m = [dataB length];
     
     if( n++ != 0 && m++ != 0 ) {
         

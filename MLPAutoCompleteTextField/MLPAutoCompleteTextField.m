@@ -236,7 +236,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 + (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath
 {
-    return [NSString stringWithFormat:@"{%d,%d}",indexPath.section,indexPath.row];
+    return [NSString stringWithFormat:@"{%ld,%ld}",(long)indexPath.section,(long)indexPath.row];
 }
 
 - (void)configureCell:(UITableViewCell *)cell
