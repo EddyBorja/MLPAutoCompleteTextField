@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Mainloop. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface MLPAutoCompleteDemoTests : SenTestCase
+@interface MLPAutoCompleteDemoTests : XCTestCase
 
 @end

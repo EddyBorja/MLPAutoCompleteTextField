@@ -514,8 +514,6 @@
 		85AC584516B2004400CD60D5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584416B2004400CD60D5 /* View.xib */; };
 		85AC584C16B2089700CD60D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584B16B2089700CD60D5 /* Default@2x.png */; };
 		85AC584E16B2089C00CD60D5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AC584D16B2089C00CD60D5 /* Default-568h@2x.png */; };
-		85E716E31753060800A992A0 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E716E11753060800A992A0 /* libGoogleAnalytics_debug.a */; };
-		85E716E41753060800A992A0 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E716E21753060800A992A0 /* libGoogleAnalytics.a */; };
 		85E716E61753061B00A992A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E716E51753061B00A992A0 /* SystemConfiguration.framework */; };
 		85E716E81753063300A992A0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E716E71753063300A992A0 /* CoreData.framework */; };
 		85EB411616C3488D000C193E /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EB411116C3488D000C193E /* MLPAutoCompleteTextField.m */; };
@@ -527,7 +525,6 @@
 		85FF057316B0874D009A94EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057216B0874D009A94EE /* main.m */; };
 		85FF057716B0874D009A94EE /* DEMOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057616B0874D009A94EE /* DEMOAppDelegate.m */; };
 		85FF058016B0874D009A94EE /* DEMOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057F16B0874D009A94EE /* DEMOViewController.m */; };
-		85FF058B16B0874E009A94EE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF058A16B0874E009A94EE /* SenTestingKit.framework */; };
 		85FF058C16B0874E009A94EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056616B0874D009A94EE /* UIKit.framework */; };
 		85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056816B0874D009A94EE /* Foundation.framework */; };
 		85FF059516B0874E009A94EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85FF059316B0874E009A94EE /* InfoPlist.strings */; };
@@ -1056,13 +1053,6 @@
 		85AC584416B2004400CD60D5 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		85AC584B16B2089700CD60D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		85AC584D16B2089C00CD60D5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		85E716DC1753060800A992A0 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalytics/GAI.h; sourceTree = "<group>"; };
-		85E716DD1753060800A992A0 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = GoogleAnalytics/GAITrackedViewController.h; sourceTree = "<group>"; };
-		85E716DE1753060800A992A0 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = GoogleAnalytics/GAITracker.h; sourceTree = "<group>"; };
-		85E716DF1753060800A992A0 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransaction.h; path = GoogleAnalytics/GAITransaction.h; sourceTree = "<group>"; };
-		85E716E01753060800A992A0 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransactionItem.h; path = GoogleAnalytics/GAITransactionItem.h; sourceTree = "<group>"; };
-		85E716E11753060800A992A0 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics_debug.a; path = GoogleAnalytics/libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
-		85E716E21753060800A992A0 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = GoogleAnalytics/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		85E716E51753061B00A992A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		85E716E71753063300A992A0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		85EB411016C3488D000C193E /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLPAutoCompleteTextField.h; path = MLPAutoCompleteTextField/MLPAutoCompleteTextField.h; sourceTree = SOURCE_ROOT; };
@@ -1084,7 +1074,6 @@
 		85FF057E16B0874D009A94EE /* DEMOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMOViewController.h; sourceTree = "<group>"; };
 		85FF057F16B0874D009A94EE /* DEMOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOViewController.m; sourceTree = "<group>"; };
 		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		85FF058A16B0874E009A94EE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		85FF059216B0874E009A94EE /* MLPAutoCompleteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLPAutoCompleteDemoTests-Info.plist"; sourceTree = "<group>"; };
 		85FF059416B0874E009A94EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85FF059616B0874E009A94EE /* MLPAutoCompleteDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteDemoTests.h; sourceTree = "<group>"; };
@@ -1101,8 +1090,6 @@
 				85FF056916B0874D009A94EE /* Foundation.framework in Frameworks */,
 				85FF056B16B0874D009A94EE /* CoreGraphics.framework in Frameworks */,
 				8559144C16C1CE36007F88DE /* QuartzCore.framework in Frameworks */,
-				85E716E31753060800A992A0 /* libGoogleAnalytics_debug.a in Frameworks */,
-				85E716E41753060800A992A0 /* libGoogleAnalytics.a in Frameworks */,
 				85E716E61753061B00A992A0 /* SystemConfiguration.framework in Frameworks */,
 				85E716E81753063300A992A0 /* CoreData.framework in Frameworks */,
 			);
@@ -1112,7 +1099,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85FF058B16B0874E009A94EE /* SenTestingKit.framework in Frameworks */,
 				85FF058C16B0874E009A94EE /* UIKit.framework in Frameworks */,
 				85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */,
 			);
@@ -1635,20 +1621,6 @@
 			name = Flags;
 			sourceTree = "<group>";
 		};
-		85E716DB175305F500A992A0 /* GAI */ = {
-			isa = PBXGroup;
-			children = (
-				85E716DC1753060800A992A0 /* GAI.h */,
-				85E716DD1753060800A992A0 /* GAITrackedViewController.h */,
-				85E716DE1753060800A992A0 /* GAITracker.h */,
-				85E716DF1753060800A992A0 /* GAITransaction.h */,
-				85E716E01753060800A992A0 /* GAITransactionItem.h */,
-				85E716E11753060800A992A0 /* libGoogleAnalytics_debug.a */,
-				85E716E21753060800A992A0 /* libGoogleAnalytics.a */,
-			);
-			name = GAI;
-			sourceTree = "<group>";
-		};
 		85FF055716B0874D009A94EE = {
 			isa = PBXGroup;
 			children = (
@@ -1678,7 +1650,6 @@
 				85FF056616B0874D009A94EE /* UIKit.framework */,
 				85FF056816B0874D009A94EE /* Foundation.framework */,
 				85FF056A16B0874D009A94EE /* CoreGraphics.framework */,
-				85FF058A16B0874E009A94EE /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1705,7 +1676,6 @@
 		85FF056D16B0874D009A94EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				85E716DB175305F500A992A0 /* GAI */,
 				8559124E16C19391007F88DE /* Flags */,
 				8559105916C1926A007F88DE /* Flags @2x */,
 				85FF056E16B0874D009A94EE /* MLPAutoCompleteDemo-Info.plist */,
@@ -1789,7 +1759,7 @@
 			name = MLPAutoCompleteDemoTests;
 			productName = MLPAutoCompleteDemoTests;
 			productReference = 85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1798,7 +1768,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MLP;
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Mainloop;
 			};
@@ -2469,10 +2439,7 @@
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/MLPAutoCompleteDemo/GoogleAnalytics\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2485,10 +2452,7 @@
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/MLPAutoCompleteDemo/GoogleAnalytics\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2501,13 +2465,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -2518,13 +2482,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
