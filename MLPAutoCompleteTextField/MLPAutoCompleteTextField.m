@@ -444,9 +444,14 @@ withAutoCompleteString:(NSString *)string
         }
         
         [self.superview bringSubviewToFront:self];
+#if BROKEN
         UIView *rootView = [self.window.subviews objectAtIndex:0];
         [rootView insertSubview:self.autoCompleteTableView
+                   belowSubview:self];
+#else
+        [self.superview insertSubview:self.autoCompleteTableView
                          belowSubview:self];
+#endif
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
             [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -764,6 +769,9 @@ withAutoCompleteString:(NSString *)string
 - (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
+#if BROKEN
+    // TODO: Reimplement this code for people using table views. Right now it breaks
+    //       more normal use cases because of UILayoutContainerView
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
     
     UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
@@ -772,10 +780,18 @@ withAutoCompleteString:(NSString *)string
     
     CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
     CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textfieldTopInset;
+    
+#else
+    CGRect newTableViewFrame = [self autoCompleteTableViewFrameForTextField:textField];
+    CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
+#endif
+    
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
     
     newTableViewFrame.size.height = height;
+#if BROKEN
     newTableViewFrame.origin.y    = converted_originY;
+#endif
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
         newTableViewFrame.size.height += textfieldTopInset;
