@@ -773,9 +773,13 @@ withAutoCompleteString:(NSString *)string
     CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
     CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textFieldFrameInContainerView.size.height + textfieldTopInset;
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
+
+    CGFloat textfieldLeftInset = textField.autoCompleteTableView.contentInset.left;
+    CGFloat converted_originX = textFieldFrameInContainerView.origin.x + textfieldLeftInset;
     
     newTableViewFrame.size.height = height;
     newTableViewFrame.origin.y    = converted_originY;
+    newTableViewFrame.origin.x    = converted_originX;
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
         newTableViewFrame.size.height += textfieldTopInset;
