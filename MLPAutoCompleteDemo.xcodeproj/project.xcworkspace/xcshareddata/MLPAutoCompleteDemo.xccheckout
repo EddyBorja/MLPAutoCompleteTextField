@@ -10,29 +10,29 @@
 	<string>MLPAutoCompleteDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</key>
+		<key>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</key>
 		<string>https://github.com/EddyBorja/MLPAutoCompleteTextField.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MLPAutoCompleteDemo.xcodeproj/project.xcworkspace</string>
+	<string>MLPAutoCompleteDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</key>
+		<key>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/EddyBorja/MLPAutoCompleteTextField.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</string>
+	<string>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CBC51ACE-BCFB-4746-9660-5CC11D2D9423</string>
+			<string>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MLPAutoCompleteTextField</string>
 		</dict>
