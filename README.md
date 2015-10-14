@@ -36,7 +36,7 @@ As of version 1.3 of _MLPAutoCompleteTextField_, the autocomplete suggestions ca
 
 
 
-Cocoapods
+CocoaPods
 -------
 CocoaPods are the best way to manage library dependencies in Objective-C projects.
 Learn more at http://cocoapods.org
