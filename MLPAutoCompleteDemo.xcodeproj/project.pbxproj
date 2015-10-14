@@ -525,7 +525,6 @@
 		85FF057316B0874D009A94EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057216B0874D009A94EE /* main.m */; };
 		85FF057716B0874D009A94EE /* DEMOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057616B0874D009A94EE /* DEMOAppDelegate.m */; };
 		85FF058016B0874D009A94EE /* DEMOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF057F16B0874D009A94EE /* DEMOViewController.m */; };
-		85FF058B16B0874E009A94EE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF058A16B0874E009A94EE /* SenTestingKit.framework */; };
 		85FF058C16B0874E009A94EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056616B0874D009A94EE /* UIKit.framework */; };
 		85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF056816B0874D009A94EE /* Foundation.framework */; };
 		85FF059516B0874E009A94EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85FF059316B0874E009A94EE /* InfoPlist.strings */; };
@@ -1076,8 +1075,7 @@
 		85FF057616B0874D009A94EE /* DEMOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOAppDelegate.m; sourceTree = "<group>"; };
 		85FF057E16B0874D009A94EE /* DEMOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMOViewController.h; sourceTree = "<group>"; };
 		85FF057F16B0874D009A94EE /* DEMOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOViewController.m; sourceTree = "<group>"; };
-		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		85FF058A16B0874E009A94EE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85FF059216B0874E009A94EE /* MLPAutoCompleteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLPAutoCompleteDemoTests-Info.plist"; sourceTree = "<group>"; };
 		85FF059416B0874E009A94EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85FF059616B0874E009A94EE /* MLPAutoCompleteDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteDemoTests.h; sourceTree = "<group>"; };
@@ -1117,7 +1115,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85FF058B16B0874E009A94EE /* SenTestingKit.framework in Frameworks */,
 				85FF058C16B0874E009A94EE /* UIKit.framework in Frameworks */,
 				85FF058D16B0874E009A94EE /* Foundation.framework in Frameworks */,
 			);
@@ -1672,7 +1669,7 @@
 			isa = PBXGroup;
 			children = (
 				85FF056216B0874D009A94EE /* MLPAutoCompleteDemo.app */,
-				85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */,
+				85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1688,7 +1685,6 @@
 				85FF056616B0874D009A94EE /* UIKit.framework */,
 				85FF056816B0874D009A94EE /* Foundation.framework */,
 				85FF056A16B0874D009A94EE /* CoreGraphics.framework */,
-				85FF058A16B0874E009A94EE /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1789,7 +1785,6 @@
 				85FF058416B0874E009A94EE /* Sources */,
 				85FF058516B0874E009A94EE /* Frameworks */,
 				85FF058616B0874E009A94EE /* Resources */,
-				85FF058716B0874E009A94EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1798,8 +1793,8 @@
 			);
 			name = MLPAutoCompleteDemoTests;
 			productName = MLPAutoCompleteDemoTests;
-			productReference = 85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1808,7 +1803,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MLP;
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0700;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Mainloop;
 			};
@@ -2352,22 +2347,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		85FF058716B0874E009A94EE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		85FF055E16B0874D009A94EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2513,13 +2492,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -2530,13 +2509,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
