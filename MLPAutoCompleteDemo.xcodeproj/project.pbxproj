@@ -2461,7 +2461,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/MLPAutoCompleteDemo/GoogleAnalytics\"",
 					"$(PROJECT_DIR)/MLPAutoCompleteDemo",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
@@ -2479,7 +2478,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/MLPAutoCompleteDemo/GoogleAnalytics\"",
 					"$(PROJECT_DIR)/MLPAutoCompleteDemo",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
@@ -2493,7 +2491,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MLPAutoCompleteDemo.app/MLPAutoCompleteDemo";
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 					"$(inherited)",
 				);
@@ -2511,7 +2508,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MLPAutoCompleteDemo.app/MLPAutoCompleteDemo";
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 					"$(inherited)",
 				);
