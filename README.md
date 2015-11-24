@@ -36,13 +36,17 @@ As of version 1.3 of _MLPAutoCompleteTextField_, the autocomplete suggestions ca
 
 
 
-Cocoapods
+Carthage
 -------
-CocoaPods are the best way to manage library dependencies in Objective-C projects.
-Learn more at http://cocoapods.org
+Carthage is the simplest way to include frameworks in your Cocoa applications.
 
-Add this to your podfile to add the MLPAutoCompleteTextField to your project.
-`pod 'MLPAutoCompleteTextField', '~> 1.6'`
+Learn more at https://github.com/Carthage/Carthage
+
+To use the latest version of this library, add this to your Cartfile.
+```
+# Use the latest version
+github "EddyBorja/MLPAutoCompleteTextField"
+```
 
 
 
