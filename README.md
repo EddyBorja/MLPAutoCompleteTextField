@@ -35,15 +35,21 @@ Autocomplete as a Keyboard Input Accessory
 As of version 1.3 of _MLPAutoCompleteTextField_, the autocomplete suggestions can be shown as a tableview that appears above the keyboard. To activate this feature, set the `autoCompleteTableAppearsAsKeyboardAccessory` property of the _MLPAutoCompleteTextField_ instance to `TRUE`.
 
 
+<!---
+Remove when carthage support is in.
 
-Cocoapods
+Carthage
 -------
-CocoaPods are the best way to manage library dependencies in Objective-C projects.
-Learn more at http://cocoapods.org
+Carthage is the simplest way to include frameworks in your Cocoa applications.
 
-Add this to your podfile to add the MLPAutoCompleteTextField to your project.
-`pod 'MLPAutoCompleteTextField', '~> 1.6'`
+Learn more at https://github.com/Carthage/Carthage
 
+To use the latest version of this library, add this to your Cartfile.
+```
+# Use the latest version
+github "EddyBorja/MLPAutoCompleteTextField"
+```
+-->
 
 
 Notes
@@ -144,7 +150,7 @@ _NSString+Levenshtein_ category extension was written by Mark Aufflick.
 If you make use of _MLPAutoCompleteTextField_, tell us about it! 
 Feel free to leave comments, likes, hatemail, etc at hello@mainloop.us
 
-
+These days I'm unable to continue working on this project due to other obligations, but I'm always open to pull requests. 
 
 More Stuff
 ---------

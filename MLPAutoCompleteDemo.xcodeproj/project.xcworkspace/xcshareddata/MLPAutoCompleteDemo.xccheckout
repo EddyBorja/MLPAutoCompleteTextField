@@ -16,7 +16,7 @@
 		<string>https://github.com/EddyBorja/markovator.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MLPAutoCompleteDemo.xcodeproj/project.xcworkspace</string>
+	<string>MLPAutoCompleteDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</key>
@@ -36,6 +36,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+<<<<<<< HEAD
 			<string>DD67C4A37BA8705A89363F98E92A1DFA467172B9</string>
 			<key>IDESourceControlWCCName</key>
 			<string></string>
@@ -44,6 +45,8 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+=======
+>>>>>>> 2031e7016d4f2a02ae5fc43369c2447b064ff158
 			<string>38BAA13FE9127B52572359F2041DDF2C1CD49C4D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MLPAutoCompleteTextField</string>

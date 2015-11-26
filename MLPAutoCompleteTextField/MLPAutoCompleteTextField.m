@@ -75,15 +75,6 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 #pragma mark - Init
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self initialize];
-    }
-    return self;
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -449,9 +440,14 @@ withAutoCompleteString:(NSString *)string
         }
         
         [self.superview bringSubviewToFront:self];
+#if BROKEN
         UIView *rootView = [self.window.subviews objectAtIndex:0];
         [rootView insertSubview:self.autoCompleteTableView
+                   belowSubview:self];
+#else
+        [self.superview insertSubview:self.autoCompleteTableView
                          belowSubview:self];
+#endif
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
             [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -604,7 +600,10 @@ withAutoCompleteString:(NSString *)string
     if(self.reuseIdentifier){
         [self unregisterAutoCompleteCellForReuseIdentifier:self.reuseIdentifier];
     }
-    BOOL classSettingSupported = [self.autoCompleteTableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)];
+    
+    BOOL classSettingSupported = NO;
+    classSettingSupported = [self.autoCompleteTableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)];
+    
     NSAssert(classSettingSupported, @"Unable to set class for cell for autocomplete table, in iOS 5.0 you can set a custom NIB for a reuse identifier to get similar functionality.");
     [self.autoCompleteTableView registerClass:cellClass forCellReuseIdentifier:reuseIdentifier];
     [self setReuseIdentifier:reuseIdentifier];
@@ -774,6 +773,9 @@ withAutoCompleteString:(NSString *)string
 - (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
+#if BROKEN
+    // TODO: Reimplement this code for people using table views. Right now it breaks
+    //       more normal use cases because of UILayoutContainerView
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
     
     UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
@@ -782,10 +784,18 @@ withAutoCompleteString:(NSString *)string
     
     CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
     CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textfieldTopInset;
+    
+#else
+    CGRect newTableViewFrame = [self autoCompleteTableViewFrameForTextField:textField];
+    CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
+#endif
+    
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
     
     newTableViewFrame.size.height = height;
+#if BROKEN
     newTableViewFrame.origin.y    = converted_originY;
+#endif
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
         newTableViewFrame.size.height += textfieldTopInset;
@@ -872,7 +882,7 @@ withAutoCompleteString:(NSString *)string
 
 - (void) cancel
 {
-    dispatch_semaphore_signal(sentinelSemaphore);
+    if (sentinelSemaphore) dispatch_semaphore_signal(sentinelSemaphore);
     [super cancel];
 }
 
@@ -925,7 +935,10 @@ withAutoCompleteString:(NSString *)string
     if(!self.isCancelled){
         
         if(suggestions.count){
-            NSObject *firstObject = suggestions[0];
+            
+            NSObject *firstObject = nil;
+            firstObject = suggestions[0];
+            
             NSAssert([firstObject isKindOfClass:[NSString class]] ||
                      [firstObject conformsToProtocol:@protocol(MLPAutoCompletionObject)],
                      @"MLPAutoCompleteTextField expects an array with objects that are either strings or conform to the MLPAutoCompletionObject protocol for possible completions.");
