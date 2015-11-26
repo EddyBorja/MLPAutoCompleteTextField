@@ -1073,7 +1073,7 @@
 		85FF057616B0874D009A94EE /* DEMOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOAppDelegate.m; sourceTree = "<group>"; };
 		85FF057E16B0874D009A94EE /* DEMOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMOViewController.h; sourceTree = "<group>"; };
 		85FF057F16B0874D009A94EE /* DEMOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMOViewController.m; sourceTree = "<group>"; };
-		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLPAutoCompleteDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85FF059216B0874E009A94EE /* MLPAutoCompleteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLPAutoCompleteDemoTests-Info.plist"; sourceTree = "<group>"; };
 		85FF059416B0874E009A94EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85FF059616B0874E009A94EE /* MLPAutoCompleteDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteDemoTests.h; sourceTree = "<group>"; };
@@ -1635,7 +1635,7 @@
 			isa = PBXGroup;
 			children = (
 				85FF056216B0874D009A94EE /* MLPAutoCompleteDemo.app */,
-				85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */,
+				85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1758,7 +1758,7 @@
 			);
 			name = MLPAutoCompleteDemoTests;
 			productName = MLPAutoCompleteDemoTests;
-			productReference = 85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.octest */;
+			productReference = 85FF058916B0874E009A94EE /* MLPAutoCompleteDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1769,7 +1769,7 @@
 			attributes = {
 				CLASSPREFIX = MLP;
 				LastTestingUpgradeCheck = 0600;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Mainloop;
 			};
 			buildConfigurationList = 85FF055C16B0874D009A94EE /* Build configuration list for PBXProject "MLPAutoCompleteDemo" */;
@@ -2393,6 +2393,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2440,6 +2441,7 @@
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2453,6 +2455,7 @@
 				INFOPLIST_FILE = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2470,6 +2473,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -2487,6 +2491,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLPAutoCompleteDemo/MLPAutoCompleteDemo-Prefix.pch";
 				INFOPLIST_FILE = "MLPAutoCompleteDemoTests/MLPAutoCompleteDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mainloop.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

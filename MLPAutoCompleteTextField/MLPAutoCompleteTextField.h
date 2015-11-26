@@ -19,6 +19,7 @@
 
 @protocol MLPAutoCompleteSortOperationDelegate <NSObject>
 - (void)autoCompleteTermsDidSort:(NSArray *)completions;
+- (NSInteger)maximumEditDistanceForAutoCompleteTerms;
 @end
 
 @protocol MLPAutoCompleteFetchOperationDelegate <NSObject>
@@ -36,6 +37,7 @@
 @property (weak) IBOutlet id <MLPAutoCompleteTextFieldDataSource> autoCompleteDataSource;
 @property (weak) IBOutlet id <MLPAutoCompleteTextFieldDelegate> autoCompleteDelegate;
 
+
 @property (assign) NSTimeInterval autoCompleteFetchRequestDelay; //default is 0.1, if you fetch from a web service you may want this higher to prevent multiple calls happening very quickly.
 @property (assign) BOOL sortAutoCompleteSuggestionsByClosestMatch;
 @property (assign) BOOL applyBoldEffectToAutoCompleteSuggestions;
@@ -45,7 +47,9 @@
 @property (assign) BOOL disableAutoCompleteTableUserInteractionWhileFetching;
 @property (assign) BOOL autoCompleteTableAppearsAsKeyboardAccessory; //if set to TRUE, the autocomplete table will appear as a keyboard input accessory view rather than a drop down.
 @property (assign) BOOL shouldResignFirstResponderFromKeyboardAfterSelectionOfAutoCompleteRows; // default is TRUE
+@property (assign) NSInteger maximumEditDistance; //This is the maximum amount of edits allowed for a word to be considered as a possible autocomplete suggestion to the user input. Set this to 0 to require an exact match of the user input so far. Defaults to 100.
 
+@property (assign) BOOL requireAutoCompleteSuggestionsToMatchInputExactly; //If true, the only suggestions that are shown will be words that complete the currently user input (This is the same as a maximumEditDistance of 0). Defaults to false to take typos into consideration.
 
 @property (assign) BOOL autoCompleteTableViewHidden;
 

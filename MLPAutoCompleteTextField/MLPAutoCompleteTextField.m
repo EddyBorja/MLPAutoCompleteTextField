@@ -340,6 +340,11 @@ withAutoCompleteString:(NSString *)string
     }
 }
 
+- (NSInteger)maximumEditDistanceForAutoCompleteTerms
+{
+    return self.requireAutoCompleteSuggestionsToMatchInputExactly ? 0 : self.maximumEditDistance;
+}
+
 #pragma mark - AutoComplete Fetch Operation Delegate
 
 - (void)autoCompleteTermsDidFetch:(NSDictionary *)fetchInfo
@@ -484,6 +489,9 @@ withAutoCompleteString:(NSString *)string
     [self setAutoCompleteFontSize:13];
     [self setMaximumNumberOfAutoCompleteRows:3];
     [self setPartOfAutoCompleteRowHeightToCut:0.5f];
+    
+    [self setMaximumEditDistance:100];
+    [self setRequireAutoCompleteSuggestionsToMatchInputExactly:NO];
     
     [self setAutoCompleteTableCellBackgroundColor:[UIColor clearColor]];
     
@@ -634,6 +642,8 @@ withAutoCompleteString:(NSString *)string
             break;
     }
 }
+
+
 
 - (void)setRoundedRectStyleForAutoCompleteTableView
 {
@@ -1015,6 +1025,7 @@ withAutoCompleteString:(NSString *)string
     
     NSMutableArray *editDistances = [NSMutableArray arrayWithCapacity:possibleTerms.count];
     
+    NSInteger maxEditDistance = self.delegate.maximumEditDistanceForAutoCompleteTerms;
     
     for(NSObject *originalObject in possibleTerms) {
         
@@ -1033,6 +1044,10 @@ withAutoCompleteString:(NSString *)string
         
         NSUInteger maximumRange = (inputString.length < currentString.length) ? inputString.length : currentString.length;
         float editDistanceOfCurrentString = [inputString asciiLevenshteinDistanceWithString:[currentString substringWithRange:NSMakeRange(0, maximumRange)]];
+        
+        if(editDistanceOfCurrentString > maxEditDistance){
+            continue;
+        }
         
         NSDictionary * stringsWithEditDistances = @{kSortInputStringKey : currentString ,
                                                          kSortObjectKey : originalObject,

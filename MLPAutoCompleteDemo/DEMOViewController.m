@@ -42,11 +42,11 @@
     //[self.autocompleteDataSource setSimulateLatency:YES];
     //[self.autocompleteDataSource setTestWithAutoCompleteObjectsInsteadOfStrings:YES];
     
-    
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowWithNotification:) name:UIKeyboardDidShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideWithNotification:) name:UIKeyboardDidHideNotification object:nil];
-    
+    */
     [self.typeSwitch addTarget:self
                         action:@selector(typeDidChange:)
               forControlEvents:UIControlEventValueChanged];
@@ -86,7 +86,7 @@
 }
 
 
-
+/*
 - (void)keyboardDidShowWithNotification:(NSNotification *)aNotification
 {
     [UIView animateWithDuration:0.3
@@ -145,7 +145,7 @@
     
     [self.autocompleteTextField setAutoCompleteTableViewHidden:NO];
 }
-
+*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
