@@ -192,5 +192,20 @@
     }
 }
 
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField willHideAutoCompleteTableView:(UITableView *)autoCompleteTableView {
+    NSLog(@"Autocomplete table view will be removed from the view hierarchy");
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField willShowAutoCompleteTableView:(UITableView *)autoCompleteTableView {
+    NSLog(@"Autocomplete table view will be added to the view hierarchy");
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField didHideAutoCompleteTableView:(UITableView *)autoCompleteTableView {
+    NSLog(@"Autocomplete table view ws removed from the view hierarchy");
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField didShowAutoCompleteTableView:(UITableView *)autoCompleteTableView {
+    NSLog(@"Autocomplete table view was added to the view hierarchy");
+}
 
 @end

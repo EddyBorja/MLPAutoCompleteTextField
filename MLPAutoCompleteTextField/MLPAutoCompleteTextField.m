@@ -431,7 +431,8 @@ withAutoCompleteString:(NSString *)string
     if(numberOfRows && (self.autoCompleteTableViewHidden == NO)){
         [self.autoCompleteTableView setAlpha:1];
         
-        if(!self.autoCompleteTableView.superview){
+        BOOL tableViewWillBeAddedToViewHierarchy = !self.autoCompleteTableView.superview;
+        if(tableViewWillBeAddedToViewHierarchy){
             if([self.autoCompleteDelegate
                 respondsToSelector:@selector(autoCompleteTextField:willShowAutoCompleteTableView:)]){
                 [self.autoCompleteDelegate autoCompleteTextField:self
@@ -449,6 +450,11 @@ withAutoCompleteString:(NSString *)string
             [self.layer setShadowOffset:CGSizeMake(0, 1)];
             [self.layer setShadowOpacity:0.35];
         }
+        
+        if (tableViewWillBeAddedToViewHierarchy && [self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:didShowAutoCompleteTableView:)]) {
+            [self.autoCompleteDelegate autoCompleteTextField:self
+                                didShowAutoCompleteTableView:self.autoCompleteTableView];
+        }
     } else {
         [self closeAutoCompleteTableView];
         [self restoreOriginalShadowProperties];
@@ -459,8 +465,16 @@ withAutoCompleteString:(NSString *)string
 
 - (void)closeAutoCompleteTableView
 {
+    if ([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:willHideAutoCompleteTableView:)]) {
+        [self.autoCompleteDelegate autoCompleteTextField:self
+                            willHideAutoCompleteTableView:self.autoCompleteTableView];
+    }
     [self.autoCompleteTableView removeFromSuperview];
     [self restoreOriginalShadowProperties];
+    if ([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:didHideAutoCompleteTableView:)]) {
+        [self.autoCompleteDelegate autoCompleteTextField:self
+                            didHideAutoCompleteTableView:self.autoCompleteTableView];
+    }
 }
 
 
