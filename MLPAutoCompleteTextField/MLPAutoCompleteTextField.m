@@ -108,10 +108,13 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     
     UITableView *newTableView = [self newAutoCompleteTableViewForTextField:self];
     [self setAutoCompleteTableView:newTableView];
-    
-    [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
+}
 
 #pragma mark - Notifications and KVO
 
