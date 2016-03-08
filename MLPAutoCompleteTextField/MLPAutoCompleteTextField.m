@@ -444,9 +444,14 @@ withAutoCompleteString:(NSString *)string
         }
         
         [self.superview bringSubviewToFront:self];
-        UIView *rootView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+#if BROKEN
+        UIView *rootView = [self.window.subviews objectAtIndex:0];
         [rootView insertSubview:self.autoCompleteTableView
                    belowSubview:self];
+#else
+        [self.superview insertSubview:self.autoCompleteTableView
+                         belowSubview:self];
+#endif
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
             [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -785,24 +790,35 @@ withAutoCompleteString:(NSString *)string
 - (CGRect)autoCompleteTableViewFrameForTextField:(MLPAutoCompleteTextField *)textField
                                  forNumberOfRows:(NSInteger)numberOfRows
 {
+#if BROKEN
+    // TODO: Reimplement this code for people using table views. Right now it breaks
+    //       more normal use cases because of UILayoutContainerView
     CGRect newTableViewFrame             = [self autoCompleteTableViewFrameForTextField:textField];
     
-    UIView *rootView                     = [UIApplication sharedApplication].keyWindow.rootViewController.view;
-    CGRect textFieldFrameInContainerView = [textField convertRect:textField.bounds
-                                                        toView:rootView];
+    UIView *rootView                     = [textField.window.subviews objectAtIndex:0];
+    CGRect textFieldFrameInContainerView = [rootView convertRect:textField.bounds
+                                                        fromView:textField];
     
     CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
+    CGFloat converted_originY = textFieldFrameInContainerView.origin.y + textfieldTopInset;
+    
+#else
+    CGRect newTableViewFrame = [self autoCompleteTableViewFrameForTextField:textField];
+    CGFloat textfieldTopInset = textField.autoCompleteTableView.contentInset.top;
+#endif
     
     CGFloat height = [self autoCompleteTableHeightForTextField:textField withNumberOfRows:numberOfRows];
     
-    textFieldFrameInContainerView.size.height = height;
-    textFieldFrameInContainerView.origin.y += textField.bounds.size.height + textfieldTopInset;
+    newTableViewFrame.size.height = height;
+#if BROKEN
+    newTableViewFrame.origin.y    = converted_originY;
+#endif
     
     if(!textField.autoCompleteTableAppearsAsKeyboardAccessory){
-        textFieldFrameInContainerView.size.height += textfieldTopInset;
+        newTableViewFrame.size.height += textfieldTopInset;
     }
     
-    return textFieldFrameInContainerView;
+    return newTableViewFrame;
 }
 
 - (CGFloat)autoCompleteTableHeightForTextField:(MLPAutoCompleteTextField *)textField
