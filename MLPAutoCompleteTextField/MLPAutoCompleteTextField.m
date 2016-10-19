@@ -648,6 +648,7 @@ withAutoCompleteString:(NSString *)string
             [self setRoundedRectStyleForAutoCompleteTableView];
             break;
         case UITextBorderStyleBezel:
+            break;
         case UITextBorderStyleLine:
             [self setLineStyleForAutoCompleteTableView];
             break;
@@ -697,7 +698,7 @@ withAutoCompleteString:(NSString *)string
     [self setAutoCompleteTableOriginOffset:CGSizeMake(0, 7)];
     [self setAutoCompleteScrollIndicatorInsets:UIEdgeInsetsZero];
     [self setAutoCompleteContentInsets:UIEdgeInsetsZero];
-    [self setAutoCompleteTableBorderWidth:1.0];
+    [self setAutoCompleteTableBorderWidth:0.0];
     
     
     UIColor *lightBlueColor = [UIColor colorWithRed:181/255.0
