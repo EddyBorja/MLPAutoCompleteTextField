@@ -372,12 +372,14 @@ withAutoCompleteString:(NSString *)string
 {
     [self saveCurrentShadowProperties];
     
+    bool didBecome = [super becomeFirstResponder];
+    
     if(self.showAutoCompleteTableWhenEditingBegins ||
        self.autoCompleteTableAppearsAsKeyboardAccessory){
         [self fetchAutoCompleteSuggestions];
     }
     
-    return [super becomeFirstResponder];
+    return didBecome;
 }
 
 - (void) finishedSearching
