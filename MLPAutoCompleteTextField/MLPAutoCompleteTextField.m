@@ -302,6 +302,10 @@ withAutoCompleteString:(NSString *)string
     NSString *autoCompleteString = selectedCell.textLabel.text;
     self.text = autoCompleteString;
     
+    if (indexPath.row > [self.autoCompleteSuggestions count]) {
+        return;
+    }
+    
     id<MLPAutoCompletionObject> autoCompleteObject = self.autoCompleteSuggestions[indexPath.row];
     if(![autoCompleteObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
         autoCompleteObject = nil;
