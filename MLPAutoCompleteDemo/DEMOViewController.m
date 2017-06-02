@@ -23,6 +23,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     [self.view setAlpha:0];
     [UIView animateWithDuration:0.2
                           delay:0.25
