@@ -29,6 +29,8 @@
 
 @interface MLPAutoCompleteTextField : UITextField <UITableViewDataSource, UITableViewDelegate, MLPAutoCompleteSortOperationDelegate, MLPAutoCompleteFetchOperationDelegate>
 
+@property (assign) IBInspectable BOOL styleAutoCompleteTable;
+
 + (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath;
 
 @property (strong, readonly) UITableView *autoCompleteTableView;

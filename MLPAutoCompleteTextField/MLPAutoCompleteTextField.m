@@ -102,6 +102,8 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 - (void)initialize
 {
+    self.styleAutoCompleteTable = true;
+    
     [self beginObservingKeyPathsAndNotifications];
     
     [self setDefaultValuesForVariables];
@@ -302,6 +304,10 @@ withAutoCompleteString:(NSString *)string
     NSString *autoCompleteString = selectedCell.textLabel.text;
     self.text = autoCompleteString;
     
+    if (indexPath.row > [self.autoCompleteSuggestions count]) {
+        return;
+    }
+    
     id<MLPAutoCompletionObject> autoCompleteObject = self.autoCompleteSuggestions[indexPath.row];
     if(![autoCompleteObject conformsToProtocol:@protocol(MLPAutoCompletionObject)]){
         autoCompleteObject = nil;
@@ -372,12 +378,14 @@ withAutoCompleteString:(NSString *)string
 {
     [self saveCurrentShadowProperties];
     
+    bool didBecome = [super becomeFirstResponder];
+    
     if(self.showAutoCompleteTableWhenEditingBegins ||
        self.autoCompleteTableAppearsAsKeyboardAccessory){
         [self fetchAutoCompleteSuggestions];
     }
     
-    return [super becomeFirstResponder];
+    return didBecome;
 }
 
 - (void) finishedSearching
@@ -635,6 +643,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)styleAutoCompleteTableForBorderStyle:(UITextBorderStyle)borderStyle
 {
+    if (!self.styleAutoCompleteTable) {
+        return;
+    }
+    
     if([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:shouldStyleAutoCompleteTableView:forBorderStyle:)]){
         if(![self.autoCompleteDelegate autoCompleteTextField:self
                             shouldStyleAutoCompleteTableView:self.autoCompleteTableView
