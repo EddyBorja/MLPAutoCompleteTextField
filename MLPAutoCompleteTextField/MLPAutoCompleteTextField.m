@@ -102,6 +102,8 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
 
 - (void)initialize
 {
+    self.styleAutoCompleteTable = true;
+    
     [self beginObservingKeyPathsAndNotifications];
     
     [self setDefaultValuesForVariables];
@@ -641,6 +643,10 @@ withAutoCompleteString:(NSString *)string
 
 - (void)styleAutoCompleteTableForBorderStyle:(UITextBorderStyle)borderStyle
 {
+    if (!self.styleAutoCompleteTable) {
+        return;
+    }
+    
     if([self.autoCompleteDelegate respondsToSelector:@selector(autoCompleteTextField:shouldStyleAutoCompleteTableView:forBorderStyle:)]){
         if(![self.autoCompleteDelegate autoCompleteTextField:self
                             shouldStyleAutoCompleteTableView:self.autoCompleteTableView
