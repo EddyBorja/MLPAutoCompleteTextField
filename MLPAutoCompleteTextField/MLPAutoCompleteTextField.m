@@ -27,7 +27,7 @@ const NSTimeInterval DefaultAutoCompleteRequestDelay = 0.1;
 @interface MLPAutoCompleteSortOperation: NSOperation
 @property (strong) NSString *incompleteString;
 @property (strong) NSArray *possibleCompletions;
-@property (strong) id <MLPAutoCompleteSortOperationDelegate> delegate;
+@property (weak) id <MLPAutoCompleteSortOperationDelegate> delegate;
 @property (strong) NSDictionary *boldTextAttributes;
 @property (strong) NSDictionary *regularTextAttributes;
 
