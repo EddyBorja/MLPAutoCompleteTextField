@@ -449,8 +449,13 @@ withAutoCompleteString:(NSString *)string
         [rootView insertSubview:self.autoCompleteTableView
                    belowSubview:self];
 #else
-        [self.superview insertSubview:self.autoCompleteTableView
-                         belowSubview:self];
+        if (self.attachmentView) {
+            [self.attachmentView addSubview:self.autoCompleteTableView];
+            [self.attachmentView bringSubviewToFront:self.autoCompleteTableView];
+        } else {
+            [self.superview insertSubview:self.autoCompleteTableView
+                             belowSubview:self];
+        }
 #endif
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
@@ -843,7 +848,11 @@ withAutoCompleteString:(NSString *)string
     if (CGRectGetWidth(self.autoCompleteTableFrame) > 0){
         frame = self.autoCompleteTableFrame;
     } else {
-        frame = textField.frame;
+        if (self.attachmentView) {
+            frame = [self.attachmentView convertRect:textField.bounds fromView:textField];
+        } else {
+            frame = textField.frame;
+        }
         frame.origin.y += textField.frame.size.height;
     }
     

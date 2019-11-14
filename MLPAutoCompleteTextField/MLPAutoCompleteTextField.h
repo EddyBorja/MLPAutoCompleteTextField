@@ -31,6 +31,8 @@
 
 + (NSString *) accessibilityLabelForIndexPath:(NSIndexPath *)indexPath;
 
+@property (nonatomic, strong) UIView* attachmentView;
+
 @property (strong, readonly) UITableView *autoCompleteTableView;
 
 // all delegates and datasources should be weak referenced
